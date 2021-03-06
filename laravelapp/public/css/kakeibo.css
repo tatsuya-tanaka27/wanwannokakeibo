@@ -1,0 +1,47 @@
+@charset "UTF-8";
+/* 各画面固有のスタイル */
+
+/* ログイン画面用スタイル */
+
+#login-guide-area {
+}
+
+#login-area {
+}
+
+#login-guide-table {
+	width: 99%;
+}
+
+#login-guide-legend {
+	width: auto;
+	margin-left: 1em;
+}
+
+#login-form {
+	margin-top: -125px;
+}
+
+#userRegistration-area {
+	margin-top: 50px;
+}
+
+/* ユーザー登録画面用スタイル */
+
+/* トップ画面用スタイル */
+
+#top-description-border {
+	background-color: lightyellow;
+}
+
+#top-description-legend {
+	color: rgb(0, 111, 191);
+	margin: 0px;
+	padding: 0px;
+}
+
+/* 入力画面用スタイル */
+
+/* 家計簿登録画面用スタイル */
+
+/* 家計簿一覧画面用スタイル */
