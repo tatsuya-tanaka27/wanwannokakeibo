@@ -7,6 +7,7 @@
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 		<link href="{{ asset('css/style.css') }}" rel="stylesheet" />
 		<link href="{{ asset('css/kakeibo.css') }}" rel="stylesheet" />
+        
         <title>@yield('title')</title>
     </head>
     <body>
@@ -31,7 +32,6 @@
 				<img class="img-fluid" src="/images/unchi32.png" alt="うんちくん" />
 			</footer>
 		</section>
-        <script src="{{ asset('js/app.js') }}"></script>
-        <script src="{{ asset('js/kakeibo.js') }}"></script>
+        <script type="text/javascript" src="/js/kakeibo.js"></script>
     </body>
 </html>

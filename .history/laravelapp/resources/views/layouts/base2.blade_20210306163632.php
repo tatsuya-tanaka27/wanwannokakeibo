@@ -7,6 +7,7 @@
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 		<link href="{{ asset('css/style.css') }}" rel="stylesheet" />
 		<link href="{{ asset('css/kakeibo.css') }}" rel="stylesheet" />
+
         <title>@yield('title')</title>
     </head>
     <body>
@@ -32,6 +33,6 @@
 			</footer>
 		</section>
         <script src="{{ asset('js/app.js') }}"></script>
-        <script src="{{ asset('js/kakeibo.js') }}"></script>
+        <script type="text/javascript" src="/js/kakeibo.js"></script>
     </body>
 </html>

@@ -3,10 +3,10 @@
         <meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 		<link href="https://fonts.googleapis.com/earlyaccess/nicomoji.css" rel="stylesheet"	/>
-		<link rel="shortcut icon" href="{{ asset('/favicon.ico') }}" type="image/vnd.microsoft.icon" />
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-		<link href="{{ asset('css/style.css') }}" rel="stylesheet" />
-		<link href="{{ asset('css/kakeibo.css') }}" rel="stylesheet" />
+		<link rel="shortcut icon" href="/favicon.ico" type="image/vnd.microsoft.icon" />
+        <link href="/css/app.css" rel="stylesheet">
+		<link href="../../css/style.css" rel="stylesheet" />
+		<link href="../../css/kakeibo.css" rel="stylesheet" />
         <title>@yield('title')</title>
     </head>
     <body>
@@ -31,7 +31,7 @@
 				<img class="img-fluid" src="/images/unchi32.png" alt="うんちくん" />
 			</footer>
 		</section>
-        <script src="{{ asset('js/app.js') }}"></script>
-        <script src="{{ asset('js/kakeibo.js') }}"></script>
+        <script src="../../js/app.js"></script>
+        <script src="../../js/kakeibo.js"></script>
     </body>
 </html>

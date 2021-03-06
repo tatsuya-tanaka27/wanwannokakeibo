@@ -13,8 +13,32 @@
         <section id="header-area">
 		    <header class="d-flex p-2 bd-highlight">
 			    <img class="img-fluid" src="/images/inu80.png" alt="わんわん" />
-			    <h1 class="h1 wf-nicomoji">わんわんのカケイボ</h1>
+			    <h1 id="top-link-title" class="h1 wf-nicomoji">わんわんのカケイボ</h1>
 			    <img class="img-fluid" src="/images/neko80.png" alt="にゃんにゃん"	/>
+			    <div id="user-area" class="d-flex p-2 bd-highlight flex-column">
+				    <span>ユーザー名：{{$item->user_}}</span>
+				    <span>ユーザーID：{{$item->name}}</span>
+			    </div>
+
+			    <!--ここからハンバーガーメニュー-->
+    			<div class="hamburger-menu">
+	    			<input type="checkbox" id="menu-btn-check" />
+		    		<label for="menu-btn-check" class="menu-btn">
+			    		<span></span>
+    				</label>
+	    			<div class="menu-content">
+		    			<nav>
+			    			<ul>
+				    			<li><a href="index.html">トップ</a></li>
+					    		<li><a href="input.html">家計簿入力</a></li>
+						    	<li><a href="registration.html">家計簿項目登録</a></li>
+							    <li><a href="list.html">家計簿一覧</a></li>
+    							<li><a href="#">設定</a></li>
+	    					</ul>
+		    			</nav>
+			    	</div>
+    			</div>
+	    		<!--ここまでハンバーガーメニュー-->
     		</header>
     	</section>
         <section>
@@ -32,6 +56,7 @@
 			</footer>
 		</section>
         <script src="{{ asset('js/app.js') }}"></script>
+        <script src="{{ asset('js/script.js') }}"></script>
         <script src="{{ asset('js/kakeibo.js') }}"></script>
     </body>
 </html>

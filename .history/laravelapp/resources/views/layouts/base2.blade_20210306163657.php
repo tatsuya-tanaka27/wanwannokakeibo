@@ -32,6 +32,6 @@
 			</footer>
 		</section>
         <script src="{{ asset('js/app.js') }}"></script>
-        <script src="{{ asset('js/kakeibo.js') }}"></script>
+        <script src="{{ asset('js/kakeibo.js') }}/js/kakeibo.js"></script>
     </body>
 </html>
