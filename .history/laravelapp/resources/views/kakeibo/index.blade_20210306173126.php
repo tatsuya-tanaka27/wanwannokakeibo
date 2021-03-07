@@ -18,7 +18,7 @@
 				<div id="top-description-area">
 					<fieldset id="top-description-border" class="d-flex p-2 bd-highlight flex-column">
 					<div id="top-navi-area">
-						<a href="/wanwannokakeibo/input">
+						<a href="/wanwannokakeibo">
 							<img class="img-fluid" src="/images/nyuryoku200.png" alt="家計簿入力" />
 						</a>
 						<a href="registration.html">

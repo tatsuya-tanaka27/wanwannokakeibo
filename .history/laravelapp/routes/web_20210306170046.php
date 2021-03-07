@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\InputController;
+use App\Http\Controllers\LoginController;
 
 /*
 |--------------------------------------------------------------------------

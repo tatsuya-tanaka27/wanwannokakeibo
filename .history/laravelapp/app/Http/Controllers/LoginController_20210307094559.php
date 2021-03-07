@@ -39,7 +39,7 @@ class LoginController extends Controller
         $request->session()->put('userData', $userData);
         //$request->session()->put(['key1' => 'value1', 'key2' => 'value2']);
 
-        return view('kakeibo.index');
+        return view('kakeibo.index', ['userData' => $userData]);
     }
 
 }

@@ -36,10 +36,10 @@ class LoginController extends Controller
         $userData = DB::table('kakeibo_users')
         ->whereRaw('user_id = ? and password = ?', [$user_id, $password])->first();
 
-        $request->session()->put('userData', $userData);
-        //$request->session()->put(['key1' => 'value1', 'key2' => 'value2']);
+        $request->session()->put('key', 'value');
+        $request->session()->put(['key1' => 'value1', 'key2' => 'value2']);
 
-        return view('kakeibo.index');
+        return view('kakeibo.index', ['userData' => $userData]);
     }
 
 }

@@ -17,7 +17,7 @@
 			    <img class="img-fluid" src="/images/neko80.png" alt="にゃんにゃん"	/>
 			    <div id="user-area" class="d-flex p-2 bd-highlight flex-column">
 				    <span>ユーザー名：{{ Session::get('userData')->user_name }}</span>
-				    <span>ユーザーID：{{ Session::get('userData')->user_id }}</span>
+				    <span>ユーザーID：{{ Session::get('userData')->user_id }}{{$userData->user_id}}</span>
 			    </div>
 
 			    <!--ここからハンバーガーメニュー-->

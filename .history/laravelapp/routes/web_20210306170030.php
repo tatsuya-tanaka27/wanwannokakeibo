@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\InputController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,7 +23,7 @@ Route::post('wanwannokakeibo/index', [IndexController::class, 'post']);
 Route::get('wanwannokakeibo/login', [LoginController::class, 'index']);
 Route::post('wanwannokakeibo/login', [LoginController::class, 'post']);
 Route::get('wanwannokakeibo/input', [InputController::class, 'index']);
-Route::post('wanwannokakeibo/input', [InputController::class, 'post']);
+Route::post('wanwannokakeibo/input', [LoginController::class, 'post']);
 
 Auth::routes();
 
