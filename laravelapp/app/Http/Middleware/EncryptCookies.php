@@ -12,6 +12,10 @@ class EncryptCookies extends Middleware
      * @var array
      */
     protected $except = [
-        //
+        // 以下を追加
+        '1P_JAR',
+        'laravel_session',
+        'XSRF-TOKEN',
+        'PHPSESSID'
     ];
 }

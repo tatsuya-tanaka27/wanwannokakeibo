@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 /**
  * ログインコントローラー
@@ -38,6 +39,8 @@ class LoginController extends Controller
 
         $request->session()->put('userData', $userData);
         //$request->session()->put(['key1' => 'value1', 'key2' => 'value2']);
+
+        Log::debug('[USER_NAME：' . $userData->user_name . '　USER_ID：'. $userData->user_id . ']'. 'がログインしました。' );
 
         return view('kakeibo.index');
     }

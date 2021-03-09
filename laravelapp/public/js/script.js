@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     //わんわんの家計簿タイトル押下したら、トップ画面に遷移する
     document.getElementById("top-link-title").onclick = function() {
-        window.location.href = 'index.html';
+        window.location.href = '/wanwannokakeibo/index';
     };
 });
 

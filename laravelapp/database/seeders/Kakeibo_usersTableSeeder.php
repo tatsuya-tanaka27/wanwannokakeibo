@@ -15,8 +15,8 @@ class kakeibo_usersTableSeeder extends Seeder
     public function run()
     {
         $param = [
-            'user_id' => 'testid',
-            'password' => 'testpass',
+            'user_id' => 'wanwan',
+            'password' => 'wanwan',
             'user_name' => 'わんわん',
             'del_flg' => 0,
         ];
