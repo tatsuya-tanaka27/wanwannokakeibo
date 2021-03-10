@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
+use App\Models\Kakeibo_data;
 
 class InputController extends Controller
 {
@@ -33,6 +34,17 @@ class InputController extends Controller
 
              // デフォルトの家計簿項目をセッションにセット
             $request->session()->put('itemMst', $itemMstArray);
+
+        }
+
+        // セッションの家計簿入力データが存在していなければDBから情報取得
+        if(empty($request->session()->get('kakeiboData'))){
+
+            // 家計簿入力データをDBから取得
+            $kakeiboData = Kakeibo_data::all();
+
+            // 家計簿入力データをセッションにセット
+            $request->session()->put('kakeiboData', $kakeiboData);
         }
 
         // 画面表示
@@ -65,6 +77,12 @@ class InputController extends Controller
 
         // DB登録
         DB::table('kakeibo_data')->insert($param);
+
+        // 家計簿入力データをDBから取得
+        $kakeiboData = Kakeibo_data::all();
+
+        // 家計簿入力データをセッションにセット
+        $request->session()->put('kakeiboData', $kakeiboData);
 
         // 画面表示
         return view('kakeibo.input');

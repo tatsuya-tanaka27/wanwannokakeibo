@@ -47,20 +47,24 @@
             <th>項目</th>
             <th>金額</th>
             <th>日付</th>
+            <th>支払人</th>
             <th>備考</th>
             <th></th>
         </tr>
     </thead>
     <tbody class="table-light" align="center" nowrap>
+        @foreach(Session::get('kakeiboData') as $data)
         <tr>
-            <td>家賃</td>
-            <td>12345</td>
-            <td>2020/12/03</td>
-            <td>テスト値</td>
+            <td>{{Form::select('input_item', Session::get('itemMst'), $data->item_id)}}</td>
+            <td>{{$data->amount}}</td>
+            <td>{{$data->input_date}}</td>
+            <td>{{$data->payer}}</td>
+            <td>{{$data->remarks}}</td>
             <td>
                 <input type="button" value="修正" onclick="" />
             </td>
         </tr>
+        @endforeach
     </tbody>
 </table>
 @endsection
