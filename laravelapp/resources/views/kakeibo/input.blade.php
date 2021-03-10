@@ -17,16 +17,16 @@
     <tbody class="table-light" align="center" nowrap>
         <tr>
             <td>
-                {{Form::select('item', Session::get('itemMst'))}}
+                {{Form::select('item', $items)}}
             </td>
             <td>
-                <input　type="tel"　name="amount"　class="input_amount" value="" />
+                <input type="number" name="input_amount" class="input_amount" value="" />
             </td>
             <td>
-                <input type="date" />
+                <input type="date" name="input_date" />
             </td>
             <td>
-                <input　type="text" name="biko" class="input_biko" 　value="テスト値" />
+                <input type="text" name="input_remarks" class="input_biko" value="テスト値" />
             </td>
             <td>
                 <input type="button" value="登録" onclick="" />
