@@ -17,7 +17,7 @@
     <tbody class="table-light" align="center" nowrap>
         <tr>
             <td>
-                {{Form::select('item', $items)}}
+                {{Form::select('item', Session::get('itemMst'))}}
             </td>
             <td>
                 <input type="number" name="input_amount" class="input_amount" value="" />
