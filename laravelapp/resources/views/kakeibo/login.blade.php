@@ -51,7 +51,7 @@
     <div id="login-area">
         <div id="login-fome-area" class="float-right">
             <img class="img-fluid" src="/images/loginhome300.PNG" alt="ログインの家" />
-            <form id="login-form" class="text-center container" action="/wanwannokakeibo/login" method="post">
+            <form name="login-form" class="text-center container" action="/wanwannokakeibo/login" method="post">
                 @csrf
                 <div id="login-input">
                     <input id="login-un" type="text" align="center" placeholder="UserId" name="user_id" />
