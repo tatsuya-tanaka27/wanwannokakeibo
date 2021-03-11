@@ -45,4 +45,20 @@ class LoginController extends Controller
         return view('kakeibo.index');
     }
 
+    /**
+    * ログアウト処理
+    *
+    * @param Request $request リクエストパラメーター
+    * @return ログイン画面にリダイレクト
+    */
+    public function logout(Request $request)
+    {
+        $request->session()->forget('inputItems');
+        $request->session()->forget('kakeiboData');
+
+        // セッションから全データを削除する
+        //$request->session()->flush();
+
+        return view('kakeibo.login');
+    }
 }

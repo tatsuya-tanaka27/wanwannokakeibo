@@ -25,6 +25,7 @@ Route::get('wanwannokakeibo/login', [LoginController::class, 'index']);
 Route::post('wanwannokakeibo/login', [LoginController::class, 'post']);
 Route::get('wanwannokakeibo/input', [InputController::class, 'index']);
 Route::post('wanwannokakeibo/input', [InputController::class, 'post']);
+Route::get('wanwannokakeibo/logout', [LoginController::class, 'logout']);
 
 Auth::routes();
 

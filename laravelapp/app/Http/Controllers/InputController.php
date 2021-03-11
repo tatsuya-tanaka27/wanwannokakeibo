@@ -19,7 +19,7 @@ class InputController extends Controller
     public function index(Request $request)
     {
         // セッションのデフォルトの家計簿項目が存在していなければDBから情報取得
-        if(empty($request->session()->get('itemMst'))){
+        if(empty($request->session()->get('inputItems'))){
 
             // デフォルトの家計簿項目をDBから取得
             $itemMstList = DB::table('kakeibo_item_mst')->get();
@@ -33,7 +33,7 @@ class InputController extends Controller
             }
 
              // デフォルトの家計簿項目をセッションにセット
-            $request->session()->put('itemMst', $itemMstArray);
+            $request->session()->put('inputItems', $itemMstArray);
 
         }
 
@@ -41,7 +41,8 @@ class InputController extends Controller
         if(empty($request->session()->get('kakeiboData'))){
 
             // 家計簿入力データをDBから取得
-            $kakeiboData = Kakeibo_data::all();
+            $kakeiboData = Kakeibo_data::where('user_id', $request->session()->get('userData')->user_id)->orderBy('input_date', 'asc')->get();
+            //$kakeiboData = Kakeibo_data::all();
 
             // 家計簿入力データをセッションにセット
             $request->session()->put('kakeiboData', $kakeiboData);
@@ -79,7 +80,8 @@ class InputController extends Controller
         DB::table('kakeibo_data')->insert($param);
 
         // 家計簿入力データをDBから取得
-        $kakeiboData = Kakeibo_data::all();
+        $kakeiboData = Kakeibo_data::where('user_id', $request->session()->get('userData')->user_id)->orderBy('input_date', 'asc')->get();
+        //$kakeiboData = Kakeibo_data::all();
 
         // 家計簿入力データをセッションにセット
         $request->session()->put('kakeiboData', $kakeiboData);

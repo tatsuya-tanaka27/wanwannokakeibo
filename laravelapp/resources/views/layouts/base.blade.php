@@ -21,6 +21,9 @@
                     <span>ユーザー名：{{ Session::get('userData')->user_name }}</span>
                     <span>ユーザーID：{{ Session::get('userData')->user_id }}</span>
                 </div>
+                <a href="/wanwannokakeibo/logout">
+                    <img class="img-fluid" src="/images/logout80.png" alt="ログアウト" />
+                </a>
 
                 <!--ここからハンバーガーメニュー-->
                 <div class="hamburger-menu">

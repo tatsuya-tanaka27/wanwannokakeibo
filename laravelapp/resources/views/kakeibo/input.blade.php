@@ -20,7 +20,7 @@
             @csrf
             <tr>
                 <td>
-                    {{Form::select('input_item', Session::get('itemMst'))}}
+                    {{Form::select('input_item', Session::get('inputItems'))}}
                 </td>
                 <td>
                     <input type="number" name="input_amount" class="" value="" />
