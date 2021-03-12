@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+//require vendor/autoload.php;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use App\Common\KakeiboCommon;
 use App\Models\Kakeibo_data;
 
 /**
@@ -58,7 +61,7 @@ class LoginController extends Controller
         $request->session()->put('inputItems', $itemMstArray);
 
         // 家計簿入力データをDBから取得
-        $kakeiboData = Kakeibo_data::where('user_id', $request->session()->get('userData')->user_id)->orderBy('input_date', 'asc')->get();
+        $kakeiboData = KakeiboCommon::getKakeiboData($request->session()->get('userData')->user_id);
         //$kakeiboData = Kakeibo_data::all();
 
         // 家計簿入力データをセッションにセット

@@ -230,6 +230,9 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
+        // KakeiboCommon
+        'KakeiboCommon' => app\Common\KakeiboCommon::class,
+
         // Debugbar
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
 

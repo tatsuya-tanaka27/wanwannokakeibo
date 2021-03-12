@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+//require vendor/autoload.php;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
+use App\Common\KakeiboCommon;
 use App\Models\Kakeibo_data;
 
 /**
@@ -54,7 +57,7 @@ class InputController extends Controller
         DB::table('kakeibo_data')->insert($param);
 
         // 家計簿入力データをDBから取得
-        $kakeiboData = Kakeibo_data::where('user_id', $request->session()->get('userData')->user_id)->orderBy('input_date', 'asc')->get();
+        $kakeiboData = KakeiboCommon::getKakeiboData($request->session()->get('userData')->user_id);
 
         // 家計簿入力データをセッションにセット
         $request->session()->put('kakeiboData', $kakeiboData);
@@ -89,7 +92,7 @@ class InputController extends Controller
         DB::table('kakeibo_data')->where('id', $request->update_id)->update($param);
 
         // 家計簿入力データをDBから取得
-        $kakeiboData = Kakeibo_data::where('user_id', $request->session()->get('userData')->user_id)->orderBy('input_date', 'asc')->get();
+        $kakeiboData = KakeiboCommon::getKakeiboData($request->session()->get('userData')->user_id);
 
         // 家計簿入力データをセッションにセット
         $request->session()->put('kakeiboData', $kakeiboData);

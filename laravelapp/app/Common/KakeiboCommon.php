@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace app\Common;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -11,7 +11,7 @@ use App\Models\Kakeibo_data;
  * 共通処理用クラス
  * @author t_tanaka
  */
-class Common
+class KakeiboCommon
 {
     /**
     * 家計簿データ取得処理
@@ -19,7 +19,7 @@ class Common
     * @param Request $user_id ユーザーID
     * @return 家計簿データ
     */
-    function getKakeiboData($user_id){
+    public static function getKakeiboData($user_id){
         return Kakeibo_data::where('user_id', $user_id)->orderBy('input_date', 'asc')->get();
     }
 }
