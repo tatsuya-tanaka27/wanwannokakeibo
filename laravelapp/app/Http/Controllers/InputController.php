@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
 use App\Models\Kakeibo_data;
 
+/**
+ * 家計簿入力画面コントローラー
+ * @author t_tanaka
+ */
 class InputController extends Controller
 {
     /**
@@ -18,36 +22,6 @@ class InputController extends Controller
     */
     public function index(Request $request)
     {
-        // セッションのデフォルトの家計簿項目が存在していなければDBから情報取得
-        if(empty($request->session()->get('inputItems'))){
-
-            // デフォルトの家計簿項目をDBから取得
-            $itemMstList = DB::table('kakeibo_item_mst')->get();
-
-            // デフォルトの家計簿項目を配列にセット
-            $itemMstArray = array();
-            foreach($itemMstList as $itemMst){
-                $item_key = $itemMst->item_id;
-                $item_val = $itemMst->item_name;
-                $itemMstArray += array($item_key=>$item_val);
-            }
-
-             // デフォルトの家計簿項目をセッションにセット
-            $request->session()->put('inputItems', $itemMstArray);
-
-        }
-
-        // セッションの家計簿入力データが存在していなければDBから情報取得
-        if(empty($request->session()->get('kakeiboData'))){
-
-            // 家計簿入力データをDBから取得
-            $kakeiboData = Kakeibo_data::where('user_id', $request->session()->get('userData')->user_id)->orderBy('input_date', 'asc')->get();
-            //$kakeiboData = Kakeibo_data::all();
-
-            // 家計簿入力データをセッションにセット
-            $request->session()->put('kakeiboData', $kakeiboData);
-        }
-
         // 画面表示
         return view('kakeibo.input');
     }
