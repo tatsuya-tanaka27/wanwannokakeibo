@@ -37,6 +37,9 @@ class InputController extends Controller
     */
     public function insert(Request $request)
     {
+        // 家計簿項目
+        $inputItems = $request->session()->get('inputItems');
+
         // 「今日の日付」＋「00時00分00秒」をタイムゾーン付きで取得
         $nowDate = Carbon::today('Asia/Tokyo');
 
@@ -44,6 +47,7 @@ class InputController extends Controller
         $param = [
             'user_id' => $request->session()->get('userData')->user_id,
             'item_id' => $request->input_item,
+            'item_name' => $inputItems[$request->input_item],
             'amount' => $request->input_amount,
             'input_date' => $request->input_date,
             'payer' => $request->input_payer,
@@ -74,6 +78,9 @@ class InputController extends Controller
     */
     public function update(Request $request)
     {
+        // 家計簿項目
+        $inputItems = $request->session()->get('inputItems');
+
         // 「今日の日付」＋「00時00分00秒」をタイムゾーン付きで取得
         $nowDate = Carbon::today('Asia/Tokyo');
 
@@ -81,6 +88,7 @@ class InputController extends Controller
         $param = [
             'user_id' => $request->session()->get('userData')->user_id,
             'item_id' => $request->update_item,
+            'item_name' => $inputItems[$request->input_item],
             'amount' => $request->update_amount,
             'input_date' => $request->update_date,
             'payer' => $request->update_payer,

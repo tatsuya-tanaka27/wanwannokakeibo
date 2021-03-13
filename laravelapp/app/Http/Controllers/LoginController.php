@@ -50,15 +50,15 @@ class LoginController extends Controller
         $itemMstList = DB::table('kakeibo_item_mst')->get();
 
         // デフォルトの家計簿項目を配列にセット
-        $itemMstArray = array();
+        $itemArray = array();
         foreach($itemMstList as $itemMst){
             $item_key = $itemMst->item_id;
             $item_val = $itemMst->item_name;
-            $itemMstArray += array($item_key=>$item_val);
+            $itemArray += array($item_key=>$item_val);
         }
 
         // デフォルトの家計簿項目をセッションにセット
-        $request->session()->put('inputItems', $itemMstArray);
+        $request->session()->put('inputItems', $itemArray);
 
         // 家計簿入力データをDBから取得
         $kakeiboData = KakeiboCommon::getKakeiboData($request->session()->get('userData')->user_id);

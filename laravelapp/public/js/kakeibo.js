@@ -7,6 +7,7 @@ $(function(){
  $('#listArea').width($('#listTable').width());
 });
 
+//家計簿データ削除用ajax処理
 function delete_data($id){
 
     var json = {

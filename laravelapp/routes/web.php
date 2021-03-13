@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\InputController;
+use App\Http\Controllers\ListController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,7 @@ use App\Http\Controllers\InputController;
 
 Route::get('/', function () { return view('welcome');});
 //Route::get('/wanwannokakeibo/index', 'IndexController@index');
+Route::get('wanwannokakeibo', [LoginController::class, 'index']);
 Route::get('wanwannokakeibo/index', [IndexController::class, 'index']);
 Route::post('wanwannokakeibo/index', [IndexController::class, 'post']);
 Route::get('wanwannokakeibo/login', [LoginController::class, 'index']);
@@ -27,6 +29,7 @@ Route::get('wanwannokakeibo/input', [InputController::class, 'index']);
 Route::post('wanwannokakeibo/insert', [InputController::class, 'insert']);
 Route::post('wanwannokakeibo/update', [InputController::class, 'update']);
 Route::post('wanwannokakeibo/delete', [InputController::class, 'delete']);
+Route::get('wanwannokakeibo/list', [ListController::class, 'index']);
 Route::get('wanwannokakeibo/logout', [LoginController::class, 'logout']);
 
 Auth::routes();

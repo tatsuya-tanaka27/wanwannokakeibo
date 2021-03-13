@@ -26,11 +26,11 @@
     <tbody class="table-light" align="center" nowrap>
         @foreach(Session::get('kakeiboData') as $data)
         <tr>
-            <td>{{Form::select('list_item', Session::get('inputItems'), $data->item_id)}}</td>
-            <td><input type="number" name="list_amount" value="{{$data->amount}}"></td>
-            <td><input type="date" name="list_date" value="{{$data->input_date}}"></td>
-            <td><input type="text" name="list_payer" value="{{$data->payer}}"></td>
-            <td><input type="text" name="list_remarks" value="{{$data->remarks}}"></td>
+            <td>{{$data->item_name}}</td>
+            <td>{{$data->amount}}</td>
+            <td>{{$data->input_date}}</td>
+            <td>{{$data->payer}}</td>
+            <td>{{$data->remarks}}</td>
         </tr>
         @endforeach
     </tbody>
