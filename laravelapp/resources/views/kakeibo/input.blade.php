@@ -16,7 +16,7 @@
         </tr>
     </thead>
     <tbody class="table-light" align="center" nowrap>
-        <form name="input-form" class="" action="/wanwannokakeibo/input" method="post">
+        <form name="input-form" class="" action="/wanwannokakeibo/insert" method="post">
             @csrf
             <tr>
                 <td>
@@ -50,21 +50,25 @@
             <th>支払人</th>
             <th>備考</th>
             <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody class="table-light" align="center" nowrap>
         @foreach(Session::get('kakeiboData') as $data)
-        <form name="update-form" class="" action="/wanwannokakeibo/update" method="post">
+        <form id="kakeiboData{{$data->id}}" name="update-form" class="" action="/wanwannokakeibo/update" method="post">
             @csrf
-            <input type="hidden" name="update_id" value="{{$data->id}}">
-            <tr>
+            <input id="kakeiboDataId{{$data->id}}" type="hidden" name="update_id" value="{{$data->id}}">
+            <tr id="kakeiboDataDataTr{{$data->id}}">
                 <td>{{Form::select('update_item', Session::get('inputItems'), $data->item_id)}}</td>
                 <td><input type="number" name="update_amount" value="{{$data->amount}}"></td>
                 <td><input type="date" name="update_date" value="{{$data->input_date}}"></td>
                 <td><input type="text" name="update_payer" value="{{$data->payer}}"></td>
                 <td><input type="text" name="update_remarks" value="{{$data->remarks}}"></td>
                 <td>
-                    <input type="submit" name="value" value="更新" />
+                    <input type="submit" name="update" value="更新" />
+                </td>
+                <td>
+                    <input type="button" name="delete" onclick="delete_data({{$data->id}})" value="削除" />
                 </td>
             </tr>
         </form>

@@ -24,8 +24,9 @@ Route::post('wanwannokakeibo/index', [IndexController::class, 'post']);
 Route::get('wanwannokakeibo/login', [LoginController::class, 'index']);
 Route::post('wanwannokakeibo/login', [LoginController::class, 'post']);
 Route::get('wanwannokakeibo/input', [InputController::class, 'index']);
-Route::post('wanwannokakeibo/input', [InputController::class, 'post']);
+Route::post('wanwannokakeibo/insert', [InputController::class, 'insert']);
 Route::post('wanwannokakeibo/update', [InputController::class, 'update']);
+Route::post('wanwannokakeibo/delete', [InputController::class, 'delete']);
 Route::get('wanwannokakeibo/logout', [LoginController::class, 'logout']);
 
 Auth::routes();

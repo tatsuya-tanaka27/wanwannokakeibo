@@ -30,12 +30,12 @@ class InputController extends Controller
     }
 
     /**
-    * 入力ポスト処理
+    * 入力画面登録処理
     *
     * @param Request $request リクエストパラメーター
     * @return 入力画面にリダイレクト
     */
-    public function post(Request $request)
+    public function insert(Request $request)
     {
         // 「今日の日付」＋「00時00分00秒」をタイムゾーン付きで取得
         $nowDate = Carbon::today('Asia/Tokyo');
@@ -98,6 +98,27 @@ class InputController extends Controller
         $request->session()->put('kakeiboData', $kakeiboData);
 
         // 画面表示
+        return view('kakeibo.input');
+    }
+
+    /**
+    * 入力画面削除処理
+    *
+    * @param Request $request リクエストパラメーター
+    * @return 入力画面にリダイレクト
+    */
+    public function delete(Request $request)
+    {
+        // DB削除
+        DB::table('kakeibo_data')->where('id', $request->id)->delete();
+
+        // 家計簿入力データをDBから取得
+        $kakeiboData = KakeiboCommon::getKakeiboData($request->session()->get('userData')->user_id);
+
+        // 家計簿入力データをセッションにセット
+        $request->session()->put('kakeiboData', $kakeiboData);
+
+        // 画面表示(ajax通信で走る処理なので、この画面結果を返しても特に何もしない)
         return view('kakeibo.input');
     }
 }
