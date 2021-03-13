@@ -233,6 +233,9 @@ return [
         // KakeiboCommon
         'KakeiboCommon' => app\Common\KakeiboCommon::class,
 
+        // KakeiboLogic
+        'KakeiboLogic' => app\Common\KakeiboLogic::class,
+
         // Debugbar
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
 

@@ -20,19 +20,19 @@
             @csrf
             <tr>
                 <td>
-                    {{Form::select('input_item', Session::get('inputItems'))}}
+                    {{Form::select('item', Session::get('inputItems'))}}
                 </td>
                 <td>
-                    <input type="number" name="input_amount" class="" value="" />
+                    <input type="number" name="amount" class="" value="" />
                 </td>
                 <td>
-                    <input type="date" name="input_date" />
+                    <input type="date" name="date" />
                 </td>
                 <td>
-                    <input type="text" name="input_payer" class="" value="テスト" />
+                    <input type="text" name="payer" class="" value="テスト" />
                 </td>
                 <td>
-                    <input type="text" name="input_remarks" class="" value="テスト値" />
+                    <input type="text" name="remarks" class="" value="テスト値" />
                 </td>
                 <td>
                     <input type="submit" value="登録" />
@@ -59,11 +59,11 @@
             @csrf
             <input id="kakeiboDataId{{$data->id}}" type="hidden" name="update_id" value="{{$data->id}}">
             <tr id="kakeiboDataDataTr{{$data->id}}">
-                <td>{{Form::select('update_item', Session::get('inputItems'), $data->item_id)}}</td>
-                <td><input type="number" name="update_amount" value="{{$data->amount}}"></td>
-                <td><input type="date" name="update_date" value="{{$data->input_date}}"></td>
-                <td><input type="text" name="update_payer" value="{{$data->payer}}"></td>
-                <td><input type="text" name="update_remarks" value="{{$data->remarks}}"></td>
+                <td>{{Form::select('item', Session::get('inputItems'), $data->item_id)}}</td>
+                <td><input type="number" name="amount" value="{{$data->amount}}"></td>
+                <td><input type="date" name="date" value="{{$data->input_date}}"></td>
+                <td><input type="text" name="payer" value="{{$data->payer}}"></td>
+                <td><input type="text" name="remarks" value="{{$data->remarks}}"></td>
                 <td>
                     <input type="submit" name="update" value="更新" />
                 </td>

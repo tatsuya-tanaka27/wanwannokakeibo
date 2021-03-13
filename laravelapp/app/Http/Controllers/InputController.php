@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers;
 
-//require vendor/autoload.php;
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
-use App\Common\KakeiboCommon;
-use App\Models\Kakeibo_data;
+use App\Logic\KakeiboLogic;
 
 /**
  * 家計簿入力画面コントローラー
@@ -37,34 +34,14 @@ class InputController extends Controller
     */
     public function insert(Request $request)
     {
-        // 家計簿項目
-        $inputItems = $request->session()->get('inputItems');
-
-        // 「今日の日付」＋「00時00分00秒」をタイムゾーン付きで取得
-        $nowDate = Carbon::today('Asia/Tokyo');
-
-        // 画面から取得した値をDBに登録する値として設定
-        $param = [
-            'user_id' => $request->session()->get('userData')->user_id,
-            'item_id' => $request->input_item,
-            'item_name' => $inputItems[$request->input_item],
-            'amount' => $request->input_amount,
-            'input_date' => $request->input_date,
-            'payer' => $request->input_payer,
-            'remarks' => $request->input_remarks,
-            'del_flg' => 0,
-            'created_at' => $nowDate,
-            'updated_at' => $nowDate,
-        ];
+        // DB登録用のパラメータを取得
+        $param = KakeiboLogic::getParam($request, true);
 
         // DB登録
         DB::table('kakeibo_data')->insert($param);
 
-        // 家計簿入力データをDBから取得
-        $kakeiboData = KakeiboCommon::getKakeiboData($request->session()->get('userData')->user_id);
-
-        // 家計簿入力データをセッションにセット
-        $request->session()->put('kakeiboData', $kakeiboData);
+        // 家計簿入力データをDBから再取得して、画面表示用のデータを洗い替え
+        KakeiboLogic::setKdakeiboData($request);
 
         // 画面表示
         return view('kakeibo.input');
@@ -78,32 +55,14 @@ class InputController extends Controller
     */
     public function update(Request $request)
     {
-        // 家計簿項目
-        $inputItems = $request->session()->get('inputItems');
-
-        // 「今日の日付」＋「00時00分00秒」をタイムゾーン付きで取得
-        $nowDate = Carbon::today('Asia/Tokyo');
-
-        // 画面から取得した値をDBに登録する値として設定
-        $param = [
-            'user_id' => $request->session()->get('userData')->user_id,
-            'item_id' => $request->update_item,
-            'item_name' => $inputItems[$request->input_item],
-            'amount' => $request->update_amount,
-            'input_date' => $request->update_date,
-            'payer' => $request->update_payer,
-            'remarks' => $request->update_remarks,
-            'updated_at' => $nowDate,
-        ];
+        // DB更新用のパラメータを取得
+        $param = KakeiboLogic::getParam($request, false);
 
         // DB更新
         DB::table('kakeibo_data')->where('id', $request->update_id)->update($param);
 
-        // 家計簿入力データをDBから取得
-        $kakeiboData = KakeiboCommon::getKakeiboData($request->session()->get('userData')->user_id);
-
-        // 家計簿入力データをセッションにセット
-        $request->session()->put('kakeiboData', $kakeiboData);
+        // 家計簿入力データをDBから再取得して、画面表示用のデータを洗い替え
+        KakeiboLogic::setKdakeiboData($request);
 
         // 画面表示
         return view('kakeibo.input');
@@ -120,13 +79,11 @@ class InputController extends Controller
         // DB削除
         DB::table('kakeibo_data')->where('id', $request->id)->delete();
 
-        // 家計簿入力データをDBから取得
-        $kakeiboData = KakeiboCommon::getKakeiboData($request->session()->get('userData')->user_id);
-
-        // 家計簿入力データをセッションにセット
-        $request->session()->put('kakeiboData', $kakeiboData);
+        // 家計簿入力データをDBから再取得して、画面表示用のデータを洗い替え
+        KakeiboLogic::setKdakeiboData($request);
 
         // 画面表示(ajax通信で走る処理なので、この画面結果を返しても特に何もしない)
         return view('kakeibo.input');
     }
+
 }

@@ -42,7 +42,8 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/",
-            "App\\Common\\" : "app/Common/"
+            "App\\Common\\" : "app/Common/",
+            "App\\Logic\\" : "app/Logic/"
         }
     },
     "autoload-dev": {
