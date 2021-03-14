@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Log;
 use App\Models\Kakeibo_user;
 use Carbon\Carbon;
 
+/**
+ * ユーザー登録画面コントローラー
+ * @author t_tanaka
+ */
 class UserRegistrationController extends Controller
 {
     /**

@@ -7,7 +7,7 @@
     <p id="userRegistration_sign" align="center">ユーザー新規登録</p>
     <form id="userRegistration_form" action="/wanwannokakeibo/userRegistration" method="post">
         @csrf
-        <div id=" userRegistration_input">
+        <div id="userRegistration_input">
             <span>ユーザーID：</span>
             <input id="userRegistration_un " name="user_id" type="text" align="center" placeholder="UserId" />
             <br />

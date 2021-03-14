@@ -5,6 +5,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserRegistrationController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\InputController;
+use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\ListController;
 
 /*
@@ -32,6 +33,10 @@ Route::get('wanwannokakeibo/input', [InputController::class, 'index']);
 Route::post('wanwannokakeibo/insert', [InputController::class, 'insert']);
 Route::post('wanwannokakeibo/update', [InputController::class, 'update']);
 Route::post('wanwannokakeibo/delete', [InputController::class, 'delete']);
+Route::get('wanwannokakeibo/registration', [RegistrationController::class, 'index']);
+Route::post('wanwannokakeibo/item-insert', [RegistrationController::class, 'insert']);
+Route::post('wanwannokakeibo/item-update', [RegistrationController::class, 'update']);
+Route::post('wanwannokakeibo/item-delete', [RegistrationController::class, 'delete']);
 Route::get('wanwannokakeibo/list', [ListController::class, 'index']);
 Route::get('wanwannokakeibo/logout', [LoginController::class, 'logout']);
 

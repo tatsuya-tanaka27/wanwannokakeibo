@@ -21,7 +21,7 @@
                     <a href="/wanwannokakeibo/input">
                         <img class="img-fluid" src="/images/nyuryoku200.png" alt="家計簿入力" />
                     </a>
-                    <a href="registration.html">
+                    <a href="/wanwannokakeibo/registration">
                         <img class="img-fluid" src="/images/komokutoroku200.PNG" alt="家計簿項目登録" />
                     </a>
                     <a href="/wanwannokakeibo/list">
