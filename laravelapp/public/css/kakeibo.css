@@ -10,34 +10,42 @@
 }
 
 #login-guide-table {
-	width: 99%;
+    width: 99%;
 }
 
 #login-guide-legend {
-	width: auto;
-	margin-left: 1em;
+    width: auto;
+    margin-left: 1em;
 }
 
 #login-form {
-	margin-top: -125px;
+    margin-top: -125px;
+}
+
+#login-submit:hover {
+    opacity: 0.7;
 }
 
 #userRegistration-area {
-	margin-top: 50px;
+    margin-top: 50px;
 }
 
 /* ユーザー登録画面用スタイル */
 
+#userRegistration-submit:hover {
+    opacity: 0.7;
+}
+
 /* トップ画面用スタイル */
 
 #top-description-border {
-	background-color: lightyellow;
+    background-color: lightyellow;
 }
 
 #top-description-legend {
-	color: rgb(0, 111, 191);
-	margin: 0px;
-	padding: 0px;
+    color: rgb(0, 111, 191);
+    margin: 0px;
+    padding: 0px;
 }
 
 /* 入力画面用スタイル */

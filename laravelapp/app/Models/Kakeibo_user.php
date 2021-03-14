@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Kakeibo_user extends Model
 {
     use HasFactory;
+
+    protected $guarded = array('id');
+    protected $fillable = ['user_id'];
 }

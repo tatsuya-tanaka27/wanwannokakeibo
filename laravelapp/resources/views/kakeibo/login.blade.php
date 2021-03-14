@@ -62,7 +62,7 @@
                     <input id="login-submit" type="image" class="img-fluid" src="/images/login100.PNG" name="login"
                         alt="ログイン">
                     <br />
-                    <a href="userRegistration.html">
+                    <a href="/wanwannokakeibo/userRegistration">
                         <img class="img-fluid" src="/images/shinkitoroku150.PNG" alt="しんきとうろく" />
                     </a>
                 </div>

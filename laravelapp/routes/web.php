@@ -1,8 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\IndexController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\UserRegistrationController;
+use App\Http\Controllers\IndexController;
 use App\Http\Controllers\InputController;
 use App\Http\Controllers\ListController;
 
@@ -25,6 +26,8 @@ Route::get('wanwannokakeibo/index', [IndexController::class, 'index']);
 Route::post('wanwannokakeibo/index', [IndexController::class, 'post']);
 Route::get('wanwannokakeibo/login', [LoginController::class, 'index']);
 Route::post('wanwannokakeibo/login', [LoginController::class, 'post']);
+Route::get('wanwannokakeibo/userRegistration', [UserRegistrationController::class, 'index']);
+Route::post('wanwannokakeibo/userRegistration', [UserRegistrationController::class, 'post']);
 Route::get('wanwannokakeibo/input', [InputController::class, 'index']);
 Route::post('wanwannokakeibo/insert', [InputController::class, 'insert']);
 Route::post('wanwannokakeibo/update', [InputController::class, 'update']);
