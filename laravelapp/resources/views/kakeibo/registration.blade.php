@@ -33,4 +33,34 @@
         </form>
     </tbody>
 </table>
+<table id="registrationListTable" class="table table-sm table-responsive">
+    <thead class="table-info">
+        <tr>
+            <th>項目ID</th>
+            <th>項目</th>
+            <th>備考</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody class="table-light" align="center" nowrap>
+        @foreach(Session::get('userItems') as $userItem)
+        <form id="userItem{{$userItem->id}}" name="update-form" class="" action="/wanwannokakeibo/update" method="post">
+            @csrf
+            <input id="userItemId{{$userItem->id}}" type="hidden" name="update_id" value="{{$userItem->id}}">
+            <tr id="userItemTr{{$userItem->id}}">
+                <td><input type="text" name="item_id" value="{{$userItem->item_id}}"></td>
+                <td><input type="text" name="item_name" value="{{$userItem->item_name}}"></td>
+                <td><input type="text" name="remarks" value="{{$userItem->remarks}}"></td>
+                <td>
+                    <input type="submit" name="update" value="更新" />
+                </td>
+                <td>
+                    <input type="button" name="delete" onclick="delete_data({{$userItem->id}})" value="削除" />
+                </td>
+            </tr>
+        </form>
+        @endforeach
+    </tbody>
+</table>
 @endsection

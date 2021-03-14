@@ -48,6 +48,10 @@ class RegistrationController extends Controller
         $kakeibo_user_items->updated_at = $nowDate;
         $kakeibo_user_items->save();
 
+        // ユーザー設定の家計簿項目をセッションにセット
+        $userItems = Kakeibo_user_items::where('user_id', $user_id)->get();
+        $request->session()->put('userItems', $userItems);
+
         return view('kakeibo.registration');
     }
 }

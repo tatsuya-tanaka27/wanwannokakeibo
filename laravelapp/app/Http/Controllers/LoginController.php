@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Common\KakeiboCommon;
 use App\Models\Kakeibo_data;
+use App\Models\Kakeibo_user_items;
 
 /**
  * ログインコントローラー
@@ -47,16 +48,40 @@ class LoginController extends Controller
         // デフォルトの家計簿項目をDBから取得
         $itemMstList = DB::table('kakeibo_item_mst')->get();
 
+        // ユーザー設定の家計簿項目をDBから取得
+        $userItemsList = Kakeibo_user_items::where('user_id', $user_id)->get();
+
+        // 家計簿項目の配列
+        $inputItemsArray = array(); // 入力画面表示用の家計簿項目配列
+        $itemMstArray = array(); // デフォルト家計簿項目配列
+        $userItemsArray = array(); // ユーザー設定の家計簿項目配列
+
         // デフォルトの家計簿項目を配列にセット
-        $itemArray = array();
         foreach($itemMstList as $itemMst){
-            $item_key = $itemMst->item_id;
-            $item_val = $itemMst->item_name;
-            $itemArray += array($item_key=>$item_val);
+            $itemMst_key = $itemMst->item_id;
+            $itemMst_val = $itemMst->item_name;
+            $itemMstArray += array($itemMst_key=>$itemMst_val);
         }
 
-        // デフォルトの家計簿項目をセッションにセット
-        $request->session()->put('inputItems', $itemArray);
+        // ユーザー設定の家計簿項目を配列にセット
+        foreach($userItemsList as $userItem){
+            $userItem_key = $userItem->item_id;
+            $userItem_val = $userItem->item_name;
+            $userItemsArray += array($userItem_key=>$userItem_val);
+        }
+
+        // デフォルト家計簿項目とユーザー設定の家計簿項目をマージしたものを入力画面表示用の家計簿項目配列にセットする
+        $inputItemsArray += $itemMstArray;
+        $inputItemsArray += $userItemsArray;
+
+        // マージした家計簿項目をセッションにセット
+        $request->session()->put('inputItems', $inputItemsArray);
+
+        // デフォルト家計簿項目をセッションにセット
+        $request->session()->put('itemMst', $itemMstList);
+
+        // ユーザー設定の家計簿項目をセッションにセット
+        $request->session()->put('userItems', $userItemsList);
 
         // 家計簿入力データをDBから取得
         $kakeiboData = KakeiboCommon::getKakeiboData($request->session()->get('userData')->user_id);
