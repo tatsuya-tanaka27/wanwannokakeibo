@@ -45,7 +45,8 @@
     </thead>
     <tbody class="table-light" align="center" nowrap>
         @foreach(Session::get('userItems') as $userItem)
-        <form id="userItem{{$userItem->id}}" name="update-form" class="" action="/wanwannokakeibo/update" method="post">
+        <form id="userItem{{$userItem->id}}" name="update-form" class="" action="/wanwannokakeibo/item-update"
+            method="post">
             @csrf
             <input id="userItemId{{$userItem->id}}" type="hidden" name="update_id" value="{{$userItem->id}}">
             <tr id="userItemTr{{$userItem->id}}">
@@ -56,7 +57,7 @@
                     <input type="submit" name="update" value="更新" />
                 </td>
                 <td>
-                    <input type="button" name="delete" onclick="delete_data({{$userItem->id}})" value="削除" />
+                    <input type="button" name="delete" onclick="delete_item({{$userItem->id}})" value="削除" />
                 </td>
             </tr>
         </form>

@@ -5,8 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use App\Models\Kakeibo_user_items;
-use Carbon\Carbon;
+use App\Logic\KakeiboLogic;
 
 /**
  * 家計簿項目登録画面コントローラー
@@ -33,9 +32,21 @@ class RegistrationController extends Controller
     */
     public function insert(Request $request)
     {
+        // DB登録用のパラメータを取得
+        $param = KakeiboLogic::getUserItemsParam($request, true);
+
+        // DB登録
+        DB::table('kakeibo_user_items')->insert($param);
+
+        // ユーザー設定の家計簿項目データをDBから再取得して、画面表示用のデータを洗い替え
+        KakeiboLogic::setUserItems($request);
+
+        // 家計簿入力画面用の家計簿項目をセッションに再セットする
+        KakeiboLogic::setInputItems($request);
+
+        /*
         // 「今日の日付」＋「00時00分00秒」をタイムゾーン付きで取得
         $nowDate = Carbon::today('Asia/Tokyo');
-
         $kakeibo_user_items = new Kakeibo_user_items();
         $form = $request->all();
         unset($form['_token']);
@@ -47,11 +58,56 @@ class RegistrationController extends Controller
         $kakeibo_user_items->created_at = $nowDate;
         $kakeibo_user_items->updated_at = $nowDate;
         $kakeibo_user_items->save();
-
         // ユーザー設定の家計簿項目をセッションにセット
         $userItems = Kakeibo_user_items::where('user_id', $user_id)->get();
         $request->session()->put('userItems', $userItems);
+        */
 
+        return view('kakeibo.registration');
+    }
+
+    /**
+    * 家計簿登録画面更新処理
+    *
+    * @param Request $request リクエストパラメーター
+    * @return 家計簿登録画面にリダイレクト
+    */
+    public function update(Request $request)
+    {
+        // DB更新用のパラメータを取得
+        $param = KakeiboLogic::getUserItemsParam($request, false);
+
+        // DB更新
+        DB::table('kakeibo_user_items')->where('id', $request->update_id)->update($param);
+
+        // ユーザー設定の家計簿項目データをDBから再取得して、画面表示用のデータを洗い替え
+        KakeiboLogic::setUserItems($request);
+
+        // 家計簿入力画面用の家計簿項目をセッションに再セットする
+        KakeiboLogic::setInputItems($request);
+
+        // 画面表示
+        return view('kakeibo.registration');
+    }
+
+    /**
+    * 家計簿登録画面削除処理
+    *
+    * @param Request $request リクエストパラメーター
+    * @return 家計簿登録画面にリダイレクト
+    */
+    public function delete(Request $request)
+    {
+        // DB削除
+        DB::table('kakeibo_user_items')->where('id', $request->id)->delete();
+
+        // ユーザー設定の家計簿項目データをDBから再取得して、画面表示用のデータを洗い替え
+        KakeiboLogic::setUserItems($request);
+
+        // 家計簿入力画面用の家計簿項目をセッションに再セットする
+        KakeiboLogic::setInputItems($request);
+
+        // 画面表示(ajax通信で走る処理なので、この画面結果を返しても特に何もしない)
         return view('kakeibo.registration');
     }
 }

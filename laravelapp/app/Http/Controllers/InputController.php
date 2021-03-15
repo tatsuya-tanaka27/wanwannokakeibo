@@ -35,7 +35,7 @@ class InputController extends Controller
     public function insert(Request $request)
     {
         // DB登録用のパラメータを取得
-        $param = KakeiboLogic::getParam($request, true);
+        $param = KakeiboLogic::getDataParam($request, true);
 
         // DB登録
         DB::table('kakeibo_data')->insert($param);
@@ -56,7 +56,7 @@ class InputController extends Controller
     public function update(Request $request)
     {
         // DB更新用のパラメータを取得
-        $param = KakeiboLogic::getParam($request, false);
+        $param = KakeiboLogic::getDataParam($request, false);
 
         // DB更新
         DB::table('kakeibo_data')->where('id', $request->update_id)->update($param);
