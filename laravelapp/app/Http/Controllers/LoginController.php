@@ -62,6 +62,11 @@ class LoginController extends Controller
     */
     public function logout(Request $request)
     {
+        // 画面入力されたユーザー情報取得
+        $userData = $request->session()->get('userData');
+
+        Log::info('[USER_NAME：' . $userData->user_name . '　USER_ID：'. $userData->user_id . ']'. 'がログインしました。' );
+
         $request->session()->forget('inputItems');
         $request->session()->forget('kakeiboData');
 
