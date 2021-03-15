@@ -22,6 +22,8 @@ class InputController extends Controller
     */
     public function index(Request $request)
     {
+        Log::info('[家計簿入力画面初期表示]' );
+
         // 画面表示
         return view('kakeibo.input');
     }
@@ -34,6 +36,8 @@ class InputController extends Controller
     */
     public function insert(Request $request)
     {
+        Log::info('[家計簿入力画面登録処理開始]' );
+
         // DB登録用のパラメータを取得
         $param = KakeiboLogic::getDataParam($request, true);
 
@@ -42,6 +46,8 @@ class InputController extends Controller
 
         // 家計簿入力データをDBから再取得して、画面表示用のデータを洗い替え
         KakeiboLogic::setKdakeiboData($request);
+
+        Log::info('[家計簿入力画面登録処理終了]' );
 
         // 画面表示
         return view('kakeibo.input');
@@ -55,6 +61,8 @@ class InputController extends Controller
     */
     public function update(Request $request)
     {
+        Log::info('[家計簿入力画面更新処理開始]' );
+
         // DB更新用のパラメータを取得
         $param = KakeiboLogic::getDataParam($request, false);
 
@@ -63,6 +71,8 @@ class InputController extends Controller
 
         // 家計簿入力データをDBから再取得して、画面表示用のデータを洗い替え
         KakeiboLogic::setKdakeiboData($request);
+
+        Log::info('[家計簿入力画面更新処理終了]' );
 
         // 画面表示
         return view('kakeibo.input');
@@ -76,11 +86,15 @@ class InputController extends Controller
     */
     public function delete(Request $request)
     {
+        Log::info('[家計簿入力画面削除処理開始]' );
+
         // DB削除
         DB::table('kakeibo_data')->where('id', $request->id)->delete();
 
         // 家計簿入力データをDBから再取得して、画面表示用のデータを洗い替え
         KakeiboLogic::setKdakeiboData($request);
+
+        Log::info('[家計簿入力画面削除処理終了]' );
 
         // 画面表示(ajax通信で走る処理なので、この画面結果を返しても特に何もしない)
         return view('kakeibo.input');

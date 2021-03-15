@@ -20,6 +20,8 @@ class ListController extends Controller
     */
     public function index(Request $request)
     {
+        Log::info('[家計簿一覧画面初期表示]' );
+
         return view('kakeibo.list');
     }
 

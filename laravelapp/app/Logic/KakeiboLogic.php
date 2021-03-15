@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
 use App\Common\KakeiboCommon;
+use App\Models\Kakeibo_user;
 
 /**
  * ロジッククラス
@@ -25,13 +26,15 @@ class KakeiboLogic
         $user_id = $request->user_id;
         $password = $request->password;
 
-        $userData = DB::table('kakeibo_users')
-        ->whereRaw('user_id = ? and password = ?', [$user_id, $password])->first();
+        $userData = Kakeibo_user::where('user_id',$user_id)->where('password', $password)->first();
+        //DB::table('kakeibo_users')->whereRaw('user_id = ? and password = ?', [$user_id, $password])->first();
+
+        Log::debug('ユーザー情報：' . $userData);
 
         $request->session()->put('userData', $userData);
         //$request->session()->put(['key1' => 'value1', 'key2' => 'value2']);
 
-        Log::debug('[USER_NAME：' . $userData->user_name . '　USER_ID：'. $userData->user_id . ']'. 'がログインしました。' );
+        Log::info('[USER_NAME：' . $userData->user_name . '　USER_ID：'. $userData->user_id . ']'. 'がログインしました。' );
     }
 
     /**
@@ -46,6 +49,8 @@ class KakeiboLogic
 
         // デフォルト家計簿項目をセッションにセット
         $request->session()->put('itemMstList', $itemMstList);
+
+        Log::debug('デフォルト家計簿項目：' . $itemMstList );
     }
 
     /**
@@ -83,6 +88,14 @@ class KakeiboLogic
             'updated_at' => $nowDate,
         );
 
+        // ログ出力用のパラメータ作成
+        $log_param = "";
+        foreach($param as $key => $value){
+            $log_param .= $key .'：' . $value . ',';
+        }
+
+        Log::debug('DB処理用家計簿データのパラメータ：' . $log_param );
+
         return $param;
     }
 
@@ -97,8 +110,11 @@ class KakeiboLogic
         $kakeiboData = KakeiboCommon::getKakeiboData($request->session()->get('userData')->user_id);
         //$kakeiboData = Kakeibo_data::all();
 
+        Log::debug('家計簿入力データ：' . $kakeiboData );
+
         // 家計簿入力データをセッションにセット
         $request->session()->put('kakeiboData', $kakeiboData);
+
     }
 
     /**
@@ -131,6 +147,14 @@ class KakeiboLogic
             'updated_at' => $nowDate,
         );
 
+        // ログ出力用のパラメータ作成
+        $log_param = "";
+        foreach($param as $key => $value){
+            $log_param .= $key .'：' . $value . ',';
+        }
+
+        Log::debug('DB処理用家計簿項目のパラメータ：' . $log_param );
+
         return $param;
     }
 
@@ -143,6 +167,8 @@ class KakeiboLogic
     {
         // ユーザー設定の家計簿項目をDBから取得
         $userItems = KakeiboCommon::getKakeiboUserItems($request->session()->get('userData')->user_id);
+
+        Log::debug('ユーザー設定の家計簿項目：' . $userItems );
 
         // ユーザー設定の家計簿項目をセッションにセット
         $request->session()->put('userItems', $userItems);
@@ -181,6 +207,14 @@ class KakeiboLogic
         // デフォルト家計簿項目とユーザー設定の家計簿項目をマージしたものを入力画面表示用の家計簿項目配列にセットする
         $inputItemsArray += $itemMstArray;
         $inputItemsArray += $userItemsArray;
+
+        // ログ出力用のパラメータ作成
+        $log_inputItems = "";
+        foreach($inputItemsArray as $key => $value){
+            $log_inputItems .= $key .'：' . $value . ',';
+        }
+
+        Log::debug('家計簿入力画面用の家計簿項目：' . $log_inputItems);
 
         // マージした家計簿項目をセッションにセット
         $request->session()->put('inputItems', $inputItemsArray);

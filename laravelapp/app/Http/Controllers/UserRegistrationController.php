@@ -22,6 +22,8 @@ class UserRegistrationController extends Controller
     */
     public function index(Request $request)
     {
+        Log::info('[ユーザー登録画面初期表示]' );
+
         return view('kakeibo.userRegistration');
     }
 
@@ -33,6 +35,8 @@ class UserRegistrationController extends Controller
     */
     public function post(Request $request)
     {
+        Log::info('[ユーザー登録処理開始]' );
+
         // 「今日の日付」＋「00時00分00秒」をタイムゾーン付きで取得
         $nowDate = Carbon::today('Asia/Tokyo');
 
@@ -55,6 +59,8 @@ class UserRegistrationController extends Controller
         ->whereRaw('user_id = ? and password = ?', [$user_id, $password])->first();
 
         $request->session()->put('userData', $userData);
+
+        Log::info('[ユーザー登録処理終了]' );
 
         return view('kakeibo.index');
     }

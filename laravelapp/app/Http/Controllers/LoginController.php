@@ -20,6 +20,7 @@ class LoginController extends Controller
     */
     public function index(Request $request)
     {
+        Log::info('[ログイン画面初期表示]' );
         return view('kakeibo.login');
     }
 
@@ -31,6 +32,8 @@ class LoginController extends Controller
     */
     public function post(Request $request)
     {
+        Log::info('[ログイン処理開始]' );
+
         // ユーザー情報をセッションにセットする
         KakeiboLogic::setUser($request);
 
@@ -45,6 +48,8 @@ class LoginController extends Controller
 
         // 家計簿入力データをDBから取得して、セッションにセットする
         KakeiboLogic::setKdakeiboData($request);
+
+        Log::info('[ログイン処理終了]' );
 
         return view('kakeibo.index');
     }

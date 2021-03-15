@@ -21,6 +21,8 @@ class RegistrationController extends Controller
     */
     public function index(Request $request)
     {
+        Log::info('[家計簿項目登録画面初期表示]' );
+
         return view('kakeibo.registration');
     }
 
@@ -32,6 +34,8 @@ class RegistrationController extends Controller
     */
     public function insert(Request $request)
     {
+        Log::info('[家計簿項目登録画面登録処理開始]' );
+
         // DB登録用のパラメータを取得
         $param = KakeiboLogic::getUserItemsParam($request, true);
 
@@ -63,6 +67,8 @@ class RegistrationController extends Controller
         $request->session()->put('userItems', $userItems);
         */
 
+        Log::info('[家計簿項目登録画面登録処理終了]' );
+
         return view('kakeibo.registration');
     }
 
@@ -74,6 +80,8 @@ class RegistrationController extends Controller
     */
     public function update(Request $request)
     {
+        Log::info('[家計簿項目登録画面更新処理開始]' );
+
         // DB更新用のパラメータを取得
         $param = KakeiboLogic::getUserItemsParam($request, false);
 
@@ -85,6 +93,8 @@ class RegistrationController extends Controller
 
         // 家計簿入力画面用の家計簿項目をセッションに再セットする
         KakeiboLogic::setInputItems($request);
+
+        Log::info('[家計簿項目登録画面更新処理終了]' );
 
         // 画面表示
         return view('kakeibo.registration');
@@ -98,6 +108,8 @@ class RegistrationController extends Controller
     */
     public function delete(Request $request)
     {
+        Log::info('[家計簿項目登録画面削除処理開始]' );
+
         // DB削除
         DB::table('kakeibo_user_items')->where('id', $request->id)->delete();
 
@@ -106,6 +118,8 @@ class RegistrationController extends Controller
 
         // 家計簿入力画面用の家計簿項目をセッションに再セットする
         KakeiboLogic::setInputItems($request);
+
+        Log::info('[家計簿項目登録画面削除処理終了]' );
 
         // 画面表示(ajax通信で走る処理なので、この画面結果を返しても特に何もしない)
         return view('kakeibo.registration');
