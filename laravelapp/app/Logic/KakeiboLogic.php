@@ -64,8 +64,8 @@ class KakeiboLogic
         // 家計簿項目
         $inputItems = $request->session()->get('inputItems');
 
-        // 「今日の日付」＋「00時00分00秒」をタイムゾーン付きで取得
-        $nowDate = Carbon::today('Asia/Tokyo');
+        // 「現在の日時」をタイムゾーン付きで取得
+        $nowDate = Carbon::now('Asia/Tokyo');
 
         // 画面から取得した値をDBに登録する値として設定
         $param = array();
@@ -104,7 +104,7 @@ class KakeiboLogic
     *
     * @param $request リクエストパラメータ
     */
-    public static function setKdakeiboData($request)
+    public static function setKakeiboData($request)
     {
         // 家計簿入力データをDBから取得
         $kakeiboData = KakeiboCommon::getKakeiboData($request->session()->get('userData')->user_id);
@@ -118,6 +118,59 @@ class KakeiboLogic
     }
 
     /**
+    * 家計簿入力データに紐づいた年月リストのセット処理
+    *
+    * @param $request リクエストパラメータ
+    */
+    public static function setKakeiboDateList($request)
+    {
+        // 家計簿入力データをセッションから取得して、配列かする
+        $kakeiboDataArray = $request->session()->get('kakeiboData')->toArray();
+
+        // 家計簿入力データ年月リスト
+        $KakeiboDateList = array();
+
+        // 家計簿入力データが存在する場合に年月リスト作成処理を行う
+        if(isset($kakeiboDataArray)){
+
+            // 年月リスト作成処理
+            foreach($kakeiboDataArray as $data){
+
+                // 入力日付文字列を日付型に変換
+                $input_date = Carbon::parse($data['input_date']);
+
+                // 処理用の一時的な日付
+                $temp_date = $input_date->year . $input_date->month;
+
+                // 年月リストに存在しない年月を追加
+                if(!in_array($temp_date, $KakeiboDateList, true)){
+                    array_push($KakeiboDateList, $temp_date);
+                }
+            }
+
+            // 「現在の日時」をタイムゾーン付きで取得
+            $now_date = Carbon::now('Asia/Tokyo');
+
+            // 現在の年月が年月リストに存在しない場合は年月リストに追加
+            $now_temp_date = $now_temp_date->year . $now_temp_date->month;
+            if(!in_array($now_temp_date, $KakeiboDateList, true)){
+                array_push($KakeiboDateList, $now_temp_date);
+            }
+        }
+
+        // ログ出力用のパラメータ作成
+        $log_KakeiboDateList = "";
+        foreach($KakeiboDateList as $key => $value){
+            $log_KakeiboDateList .= $key .'：' . $value . ',';
+        }
+
+        Log::debug('家計簿入力データ年月リスト：' . $log_KakeiboDateList );
+
+        // 家計簿入力データをセッションにセット
+        $request->session()->put('KakeiboDateList', $KakeiboDateList);
+    }
+
+    /**
     * ユーザー設定の家計簿項目のパラメータ取得処理
     *
     * @param $request リクエストパラメータ
@@ -126,8 +179,8 @@ class KakeiboLogic
     */
     public static function getUserItemsParam($request, $newFlg)
     {
-        // 「今日の日付」＋「00時00分00秒」をタイムゾーン付きで取得
-        $nowDate = Carbon::today('Asia/Tokyo');
+        // 「現在の日時」をタイムゾーン付きで取得
+        $nowDate = Carbon::now('Asia/Tokyo');
 
         // 画面から取得した値をDBに登録する値として設定
         $param = array();
