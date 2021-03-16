@@ -152,7 +152,7 @@ class KakeiboLogic
             $now_date = Carbon::now('Asia/Tokyo');
 
             // 現在の年月が年月リストに存在しない場合は年月リストに追加
-            $now_temp_date = $now_temp_date->year . $now_temp_date->month;
+            $now_temp_date = $now_date->year . $now_date->month;
             if(!in_array($now_temp_date, $KakeiboDateList, true)){
                 array_push($KakeiboDateList, $now_temp_date);
             }
