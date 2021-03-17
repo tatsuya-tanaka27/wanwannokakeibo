@@ -140,11 +140,11 @@ class KakeiboLogic
                 $input_date = Carbon::parse($data['input_date']);
 
                 // 処理用の一時的な日付
-                $temp_date = $input_date->year . $input_date->month;
+                $temp_date = array('year'=>$input_date->year, 'month'=>$input_date->month);
 
                 // 年月リストに存在しない年月を追加
                 if(!in_array($temp_date, $KakeiboDateList, true)){
-                    array_push($KakeiboDateList, $temp_date);
+                    array_push($KakeiboDateList, array('year'=>$input_date->year, 'month'=>$input_date->month));
                 }
             }
 
@@ -152,16 +152,18 @@ class KakeiboLogic
             $now_date = Carbon::now('Asia/Tokyo');
 
             // 現在の年月が年月リストに存在しない場合は年月リストに追加
-            $now_temp_date = $now_date->year . $now_date->month;
+            $now_temp_date = array('year'=>$now_date->year, 'month'=>$now_date->month);
             if(!in_array($now_temp_date, $KakeiboDateList, true)){
-                array_push($KakeiboDateList, $now_temp_date);
+                array_push($KakeiboDateList, array('year'=>$now_date->year, 'month'=>$now_date->month));
             }
         }
 
+        var_dump($KakeiboDateList);
+
         // ログ出力用のパラメータ作成
         $log_KakeiboDateList = "";
-        foreach($KakeiboDateList as $key => $value){
-            $log_KakeiboDateList .= $key .'：' . $value . ',';
+        foreach($KakeiboDateList as $KakeiboDate){
+            $log_KakeiboDateList .= strval($KakeiboDate['year']) .'：' . strval($KakeiboDate['month']) . ',';
         }
 
         Log::debug('家計簿入力データ年月リスト：' . $log_KakeiboDateList );
