@@ -47,7 +47,7 @@ class LoginController extends Controller
         KakeiboLogic::setInputItems($request);
 
         // 家計簿入力データをDBから取得して、セッションにセットする
-        KakeiboLogic::setKakeiboData($request);
+        KakeiboLogic::setKakeiboData_now($request);
 
         // 家計簿入力データに紐づく年月リストをセッションにセットする
         KakeiboLogic::setKakeiboDateList($request);

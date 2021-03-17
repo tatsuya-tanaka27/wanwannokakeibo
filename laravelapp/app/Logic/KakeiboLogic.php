@@ -118,6 +118,23 @@ class KakeiboLogic
     }
 
     /**
+    *  現在の月の家計簿入力データセット処理
+    *
+    * @param $request リクエストパラメータ
+    */
+    public static function setKakeiboData_now($request)
+    {
+        // 家計簿入力データをDBから取得
+        $kakeiboData = KakeiboCommon::getKakeiboData_now($request->session()->get('userData')->user_id);
+
+        Log::debug('家計簿入力データ：' . $kakeiboData );
+
+        // 家計簿入力データをセッションにセット
+        $request->session()->put('kakeiboData', $kakeiboData);
+
+    }
+
+    /**
     * 家計簿入力データに紐づいた年月リストのセット処理
     *
     * @param $request リクエストパラメータ
@@ -147,15 +164,15 @@ class KakeiboLogic
                     array_push($KakeiboDateList, array('year'=>$input_date->year, 'month'=>$input_date->month));
                 }
             }
+        }
 
-            // 「現在の日時」をタイムゾーン付きで取得
-            $now_date = Carbon::now('Asia/Tokyo');
+        // 「現在の日時」をタイムゾーン付きで取得
+        $now_date = Carbon::now('Asia/Tokyo');
 
-            // 現在の年月が年月リストに存在しない場合は年月リストに追加
-            $now_temp_date = array('year'=>$now_date->year, 'month'=>$now_date->month);
-            if(!in_array($now_temp_date, $KakeiboDateList, true)){
-                array_push($KakeiboDateList, array('year'=>$now_date->year, 'month'=>$now_date->month));
-            }
+        // 現在の年月が年月リストに存在しない場合は年月リストに追加
+        $now_temp_date = array('year'=>$now_date->year, 'month'=>$now_date->month);
+        if(!in_array($now_temp_date, $KakeiboDateList, true)){
+            array_push($KakeiboDateList, array('year'=>$now_date->year, 'month'=>$now_date->month));
         }
 
         // ログ出力用のパラメータ作成
