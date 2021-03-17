@@ -1,8 +1,8 @@
 $(function(){
- $('#kakeiboDate').change(function() {
+ $('#disp_date').change(function() {
 
       var json = {
-        "kakeiboDate": $(this).val()
+        "disp_date": $(this).val()
     };
 
     //これを忘れがち
@@ -16,13 +16,11 @@ $(function(){
         contentType: "application/json",
         data:JSON.stringify(json),
         //dataType:"json",
-    }).done(function(data1,textStatus,jqXHR) {
+    }).done(function(listData,textStatus,jqXHR) {
         //通信成功
         console.log("成功" + jqXHR.status);
-        //削除された行の要素を一通り削除
-        $('#userItem' + $id).remove();
-        $('#userItemId' + $id).remove();
-        $('#userItemTr' + $id).remove();
+        $('#listData').html(listData);
+
         //$("#p1").text(jqXHR.status);  //例：200とかでステータスがとれます
         //$("#p2").text(JSON.stringify(data1));  //文字列に変換する例
     }).fail(function(jqXHR, textStatus, errorThrown){

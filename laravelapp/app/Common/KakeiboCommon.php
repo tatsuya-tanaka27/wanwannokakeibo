@@ -35,7 +35,31 @@ class KakeiboCommon
     public static function getKakeiboData_now($user_id){
 
         // SQL検索用の日付パラメータ設定
-        $temp_startDate = Carbon::now('Asia/Tokyo'); // 現在の月を開始月とする
+        $temp_startDate = Carbon::now('Asia/Tokyo'); // 現在日付を日付型に変換
+        $temp_endDate = clone $temp_startDate; // 開始月をディープコピーしたものを終了月とする
+        $temp_endDate = $temp_endDate->firstOfMonth()->addMonth()->endOfMonth(); // 翌月を取得（addMonthのバグ対策）
+        $temp_startDate = $temp_startDate->firstOfMonth(); // 開始月の初日
+        $temp_endDate = $temp_endDate->firstOfMonth(); // 翌月の初日
+        $startDate = $temp_startDate->format('Y-m-d'); // 開始月をY-m-dの形式に変換
+        $endDate = $temp_endDate->format('Y-m-d'); // 開始月をY-m-dの形式に変換
+
+        return Kakeibo_data::where('user_id', $user_id)
+        ->where('input_date', '>=' , $startDate)
+        ->where('input_date', '<' , $endDate)
+        ->orderBy('input_date', 'asc')->get();
+    }
+
+    /**
+    * 表示する年月に紐づく家計簿データ取得処理
+    *
+    * @param Request $user_id ユーザーID
+    * @param Request $disp_date 表示対象の年月
+    * @return 家計簿データ
+    */
+    public static function getKakeiboData_date($user_id, $disp_date){
+
+        // SQL検索用の日付パラメータ設定
+        $temp_startDate = new Carbon($disp_date); // 表示対象日付を日付型に変換
         $temp_endDate = clone $temp_startDate; // 開始月をディープコピーしたものを終了月とする
         $temp_endDate = $temp_endDate->firstOfMonth()->addMonth()->endOfMonth(); // 翌月を取得（addMonthのバグ対策）
         $temp_startDate = $temp_startDate->firstOfMonth(); // 開始月の初日

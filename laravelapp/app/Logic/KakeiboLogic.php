@@ -135,59 +135,6 @@ class KakeiboLogic
     }
 
     /**
-    * 家計簿入力データに紐づいた年月リストのセット処理
-    *
-    * @param $request リクエストパラメータ
-    */
-    public static function setKakeiboDateList($request)
-    {
-        // 家計簿入力データをセッションから取得して、配列かする
-        $kakeiboDataArray = $request->session()->get('kakeiboData')->toArray();
-
-        // 家計簿入力データ年月リスト
-        $KakeiboDateList = array();
-
-        // 家計簿入力データが存在する場合に年月リスト作成処理を行う
-        if(isset($kakeiboDataArray)){
-
-            // 年月リスト作成処理
-            foreach($kakeiboDataArray as $data){
-
-                // 入力日付文字列を日付型に変換
-                $input_date = Carbon::parse($data['input_date']);
-
-                // 処理用の一時的な日付
-                $temp_date = array('year'=>$input_date->year, 'month'=>$input_date->month);
-
-                // 年月リストに存在しない年月を追加
-                if(!in_array($temp_date, $KakeiboDateList, true)){
-                    array_push($KakeiboDateList, array('year'=>$input_date->year, 'month'=>$input_date->month));
-                }
-            }
-        }
-
-        // 「現在の日時」をタイムゾーン付きで取得
-        $now_date = Carbon::now('Asia/Tokyo');
-
-        // 現在の年月が年月リストに存在しない場合は年月リストに追加
-        $now_temp_date = array('year'=>$now_date->year, 'month'=>$now_date->month);
-        if(!in_array($now_temp_date, $KakeiboDateList, true)){
-            array_push($KakeiboDateList, array('year'=>$now_date->year, 'month'=>$now_date->month));
-        }
-
-        // ログ出力用のパラメータ作成
-        $log_KakeiboDateList = "";
-        foreach(array_reverse($KakeiboDateList) as $KakeiboDate){
-            $log_KakeiboDateList .= strval($KakeiboDate['year']) .'：' . strval($KakeiboDate['month']) . ',';
-        }
-
-        Log::debug('家計簿入力データ年月リスト：' . $log_KakeiboDateList );
-
-        // 家計簿入力データをセッションにセット
-        $request->session()->put('KakeiboDateList', array_reverse($KakeiboDateList));
-    }
-
-    /**
     * ユーザー設定の家計簿項目のパラメータ取得処理
     *
     * @param $request リクエストパラメータ
@@ -288,6 +235,83 @@ class KakeiboLogic
 
         // マージした家計簿項目をセッションにセット
         $request->session()->put('inputItems', $inputItemsArray);
+    }
+
+    /**
+    * 家計簿入力データに紐づいた年月リストのセット処理
+    *
+    * @param $request リクエストパラメータ
+    */
+    public static function setKakeiboDateList($request)
+    {
+        // 全ての家計簿入力データをDBから取得
+        $allKakeiboData = KakeiboCommon::getKakeiboData($request->session()->get('userData')->user_id);
+
+        // 家計簿入力データをセッションから取得して、配列かする
+        $kakeiboDataArray = $allKakeiboData->toArray();
+
+        // 家計簿入力データ年月リスト
+        $KakeiboDateList = array();
+
+        // 家計簿入力データが存在する場合に年月リスト作成処理を行う
+        if(isset($kakeiboDataArray)){
+
+            // 年月リスト作成処理
+            foreach($kakeiboDataArray as $data){
+
+                // 入力日付文字列を日付型に変換
+                $input_date = Carbon::parse($data['input_date']);
+
+                // 処理用の一時的な日付
+                $temp_date = array('year'=>$input_date->year, 'month'=>$input_date->month);
+
+                // 年月リストに存在しない年月を追加
+                if(!in_array($temp_date, $KakeiboDateList, true)){
+                    array_push($KakeiboDateList, array('year'=>$input_date->year, 'month'=>$input_date->month));
+                }
+            }
+        }
+
+        // 「現在の日時」をタイムゾーン付きで取得
+        $now_date = Carbon::now('Asia/Tokyo');
+
+        // 現在の年月が年月リストに存在しない場合は年月リストに追加
+        $now_temp_date = array('year'=>$now_date->year, 'month'=>$now_date->month);
+        if(!in_array($now_temp_date, $KakeiboDateList, true)){
+            array_push($KakeiboDateList, array('year'=>$now_date->year, 'month'=>$now_date->month));
+        }
+
+        // ログ出力用のパラメータ作成
+        $log_KakeiboDateList = "";
+        foreach(array_reverse($KakeiboDateList) as $KakeiboDate){
+            $log_KakeiboDateList .= strval($KakeiboDate['year']) .'：' . strval($KakeiboDate['month']) . ',';
+        }
+
+        Log::debug('家計簿入力データ年月リスト：' . $log_KakeiboDateList );
+
+        // 年月リストをセッションにセット
+        $request->session()->put('KakeiboDateList', array_reverse($KakeiboDateList));
+    }
+
+    /**
+    *  家計簿データ一覧のセット処理
+    *
+    * @param $request リクエストパラメータ
+    * @param $disp_date 表示年月
+    */
+    public static function setKakeiboList($request, $disp_date)
+    {
+        // 年月リストを取得
+        $KakeiboDateList = $request->session()->get('KakeiboDateList');
+
+        // 表示年月に紐づいた家計簿入力データをDBから取得
+        $kakeiboList = KakeiboCommon::getKakeiboData_date($request->session()->get('userData')->user_id, $disp_date);
+
+        Log::debug('家計簿データ一覧：' . $kakeiboList );
+
+        // 家計簿データ一覧をセッションにセット
+        $request->session()->put('kakeiboList', $kakeiboList);
+
     }
 }
 ?>
