@@ -158,18 +158,16 @@ class KakeiboLogic
             }
         }
 
-        var_dump($KakeiboDateList);
-
         // ログ出力用のパラメータ作成
         $log_KakeiboDateList = "";
-        foreach($KakeiboDateList as $KakeiboDate){
+        foreach(array_reverse($KakeiboDateList) as $KakeiboDate){
             $log_KakeiboDateList .= strval($KakeiboDate['year']) .'：' . strval($KakeiboDate['month']) . ',';
         }
 
         Log::debug('家計簿入力データ年月リスト：' . $log_KakeiboDateList );
 
         // 家計簿入力データをセッションにセット
-        $request->session()->put('KakeiboDateList', $KakeiboDateList);
+        $request->session()->put('KakeiboDateList', array_reverse($KakeiboDateList));
     }
 
     /**

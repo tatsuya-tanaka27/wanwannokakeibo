@@ -38,6 +38,7 @@ Route::post('wanwannokakeibo/item-insert', [RegistrationController::class, 'inse
 Route::post('wanwannokakeibo/item-update', [RegistrationController::class, 'update']);
 Route::post('wanwannokakeibo/item-delete', [RegistrationController::class, 'delete']);
 Route::get('wanwannokakeibo/list', [ListController::class, 'index']);
+Route::post('wanwannokakeibo/list', [ListController::class, 'post']);
 Route::get('wanwannokakeibo/logout', [LoginController::class, 'logout']);
 
 Auth::routes();

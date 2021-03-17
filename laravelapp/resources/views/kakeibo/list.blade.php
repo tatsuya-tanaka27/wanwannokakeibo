@@ -7,9 +7,11 @@
 <div id="date-area">
     <div>
         <span>日付：</span>
-        <select name=”item” class="input_item">
-            <option value=””></option>
-            <option value=”2020/11”>2020/11 </option> <option value=”2020/12” selected>2020/12</option>
+        <select name=”kakeiboData” class="input_item">
+            @foreach(Session::get('KakeiboDateList') as $KakeiboDate)
+            <option value="{{$KakeiboDate['year'] . $KakeiboDate['month']}}">
+                {{$KakeiboDate['year'] . '年' . $KakeiboDate['month'] . '月'}}</option>
+            @endforeach
         </select>
     </div>
 </div>
