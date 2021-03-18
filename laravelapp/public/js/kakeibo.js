@@ -64,10 +64,8 @@ function delete_data($id){
     }).done(function(data1,textStatus,jqXHR) {
         //通信成功
         console.log("成功" + jqXHR.status);
-        //削除された行の要素を一通り削除
-        $('#kakeiboData' + $id).remove();
-        $('#kakeiboDataId' + $id).remove();
-        $('#kakeiboDataDataTr' + $id).remove();
+        //画面再リロード
+        window.location.href = "input";
         //$("#p1").text(jqXHR.status);  //例：200とかでステータスがとれます
         //$("#p2").text(JSON.stringify(data1));  //文字列に変換する例
     }).fail(function(jqXHR, textStatus, errorThrown){
@@ -100,10 +98,8 @@ function delete_item($id){
     }).done(function(data1,textStatus,jqXHR) {
         //通信成功
         console.log("成功" + jqXHR.status);
-        //削除された行の要素を一通り削除
-        $('#userItem' + $id).remove();
-        $('#userItemId' + $id).remove();
-        $('#userItemTr' + $id).remove();
+        //画面再リロード
+        window.location.href = "registration";
         //$("#p1").text(jqXHR.status);  //例：200とかでステータスがとれます
         //$("#p2").text(JSON.stringify(data1));  //文字列に変換する例
     }).fail(function(jqXHR, textStatus, errorThrown){
