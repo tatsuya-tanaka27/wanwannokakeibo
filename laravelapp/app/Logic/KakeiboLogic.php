@@ -118,14 +118,23 @@ class KakeiboLogic
     }
 
     /**
-    *  現在の年月の家計簿入力データセット処理
+    * 検索SQL用の日付パラメータ取得処理
     *
-    * @param $request リクエストパラメータ
+    * @param $dispDate 表示年月
+    *
+    * @return $dateParam 日付パラメータ
     */
-    public static function setKakeiboData_now($request)
+    public static function getDateParam($dispDate)
     {
+        // 表示年月が存在しなければ開始月を現在の年月にする
+        $temp_startDate = null;
+        if($dispDate == null){
+            $temp_startDate = Carbon::now('Asia/Tokyo'); // 現在日付を日付型に変換
+        } else {
+            $temp_startDate = new Carbon($dispDate); // 表示対象日付を日付型に変換
+        }
+
         // SQL検索用の日付パラメータ設定
-        $temp_startDate = Carbon::now('Asia/Tokyo'); // 現在日付を日付型に変換
         $temp_endDate = clone $temp_startDate; // 開始月をディープコピーしたものを終了月とする
         $temp_endDate = $temp_endDate->firstOfMonth()->addMonth()->endOfMonth(); // 翌月を取得（addMonthのバグ対策）
         $temp_startDate = $temp_startDate->firstOfMonth(); // 開始月の初日
@@ -133,8 +142,24 @@ class KakeiboLogic
         $startDate = $temp_startDate->format('Y-m-d'); // 開始月をY-m-dの形式に変換
         $endDate = $temp_endDate->format('Y-m-d'); // 開始月をY-m-dの形式に変換
 
+        // 日付パラメータをリターン
+        $dateParam = array('startDate'=>$startDate, 'endDate'=>$endDate);
+        return $dateParam;
+    }
+
+    /**
+    *  現在の年月の家計簿入力データセット処理
+    *
+    * @param $request リクエストパラメータ
+    */
+    public static function setKakeiboData_now($request)
+    {
+        // SQL検索用の日付パラメータ設定
+        $dateParam = KakeiboLogic::getDateParam(null);
+
         // 家計簿入力データをDBから取得
-        $kakeiboData_now = KakeiboCommon::getKakeiboData($request->session()->get('userData')->user_id, $startDate, $endDate);
+        $kakeiboData_now = KakeiboCommon::getKakeiboData(
+            $request->session()->get('userData')->user_id, $dateParam['startDate'], $dateParam['endDate']);
 
         Log::debug('現在の年月の家計簿入力データ：' . $kakeiboData_now );
 
@@ -152,16 +177,11 @@ class KakeiboLogic
     public static function setKakeiboData_dispDate($request, $dispDate)
     {
         // SQL検索用の日付パラメータ設定
-        $temp_startDate = new Carbon($dispDate); // 表示対象日付を日付型に変換
-        $temp_endDate = clone $temp_startDate; // 開始月をディープコピーしたものを終了月とする
-        $temp_endDate = $temp_endDate->firstOfMonth()->addMonth()->endOfMonth(); // 翌月を取得（addMonthのバグ対策）
-        $temp_startDate = $temp_startDate->firstOfMonth(); // 開始月の初日
-        $temp_endDate = $temp_endDate->firstOfMonth(); // 翌月の初日
-        $startDate = $temp_startDate->format('Y-m-d'); // 開始月をY-m-dの形式に変換
-        $endDate = $temp_endDate->format('Y-m-d'); // 開始月をY-m-dの形式に変換
+        $dateParam = KakeiboLogic::getDateParam($dispDate);
 
         // 表示年月に紐づいた家計簿入力データをDBから取得
-        $kakeiboData_dispDate = KakeiboCommon::getKakeiboData($request->session()->get('userData')->user_id, $startDate, $endDate);
+        $kakeiboData_dispDate = KakeiboCommon::getKakeiboData(
+            $request->session()->get('userData')->user_id, $dateParam['startDate'], $dateParam['endDate']);
 
         Log::debug('表示年月の家計簿データ一覧：' . $kakeiboData_dispDate );
 
@@ -178,16 +198,11 @@ class KakeiboLogic
     public static function setAggregateData_now($request)
     {
         // SQL検索用の日付パラメータ設定
-        $temp_startDate = Carbon::now('Asia/Tokyo'); // 現在日付を日付型に変換
-        $temp_endDate = clone $temp_startDate; // 開始月をディープコピーしたものを終了月とする
-        $temp_endDate = $temp_endDate->firstOfMonth()->addMonth()->endOfMonth(); // 翌月を取得（addMonthのバグ対策）
-        $temp_startDate = $temp_startDate->firstOfMonth(); // 開始月の初日
-        $temp_endDate = $temp_endDate->firstOfMonth(); // 翌月の初日
-        $startDate = $temp_startDate->format('Y-m-d'); // 開始月をY-m-dの形式に変換
-        $endDate = $temp_endDate->format('Y-m-d'); // 開始月をY-m-dの形式に変換
+        $dateParam = KakeiboLogic::getDateParam(null);
 
         // 現在の年月に紐づく家計簿入力データをDBから取得
-        $aggregateData_now = KakeiboCommon::getAggregateData($request->session()->get('userData')->user_id, $startDate, $endDate);
+        $aggregateData_now = KakeiboCommon::getAggregateData(
+            $request->session()->get('userData')->user_id, $dateParam['startDate'], $dateParam['endDate']);
 
         Log::debug('家計簿データの各項目の集計金額：' . $aggregateData_now );
 
@@ -204,21 +219,16 @@ class KakeiboLogic
     public static function setAggregateData_dispDate($request, $dispDate)
     {
         // SQL検索用の日付パラメータ設定
-        $temp_startDate = new Carbon($dispDate); // 表示対象日付を日付型に変換
-        $temp_endDate = clone $temp_startDate; // 開始月をディープコピーしたものを終了月とする
-        $temp_endDate = $temp_endDate->firstOfMonth()->addMonth()->endOfMonth(); // 翌月を取得（addMonthのバグ対策）
-        $temp_startDate = $temp_startDate->firstOfMonth(); // 開始月の初日
-        $temp_endDate = $temp_endDate->firstOfMonth(); // 翌月の初日
-        $startDate = $temp_startDate->format('Y-m-d'); // 開始月をY-m-dの形式に変換
-        $endDate = $temp_endDate->format('Y-m-d'); // 開始月をY-m-dの形式に変換
+        $dateParam = KakeiboLogic::getDateParam($dispDate);
 
         // 表示する年月に紐づく家計簿入力データをDBから取得
-        $aggregateData_dispDate = KakeiboCommon::getAggregateData($request->session()->get('userData')->user_id, $startDate, $endDate);
+        $aggregateData_dispDate = KakeiboCommon::getAggregateData(
+            $request->session()->get('userData')->user_id, $dateParam['startDate'], $dateParam['endDate']);
 
         Log::debug('表示する年月に紐づく家計簿データの各項目の集計金額：' . $aggregateData_dispDate );
 
         // 表示する年月に紐づく家計簿入力データをセッションにセット
-        $request->session()->put('aggregateData', $aggregateData_dispDate);
+        $request->session()->put('aggregateData_dispDate', $aggregateData_dispDate);
 
     }
 
