@@ -135,6 +135,23 @@ class KakeiboLogic
     }
 
     /**
+    *  現在の年月に紐づく家計簿データの各項目の集計金額のセット処理
+    *
+    * @param $request リクエストパラメータ
+    */
+    public static function setAggregateData_now($request)
+    {
+        // 家計簿入力データをDBから取得
+        $aggregateData = KakeiboCommon::getAggregateData_now($request->session()->get('userData')->user_id);
+
+        Log::debug('家計簿データの各項目の集計金額：' . $aggregateData );
+
+        // 家計簿入力データをセッションにセット
+        $request->session()->put('aggregateData', $aggregateData);
+
+    }
+
+    /**
     * ユーザー設定の家計簿項目のパラメータ取得処理
     *
     * @param $request リクエストパラメータ

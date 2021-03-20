@@ -18,7 +18,7 @@ class CreateKakeiboDataTable extends Migration
             $table->string('user_id');
             $table->string('item_id');
             $table->date('input_date');
-            $table->string('amount');
+            $table->bigInteger('amount');
             $table->string('payer')->nullable();
             $table->string('remarks')->nullable();
             $table->char('del_flg');

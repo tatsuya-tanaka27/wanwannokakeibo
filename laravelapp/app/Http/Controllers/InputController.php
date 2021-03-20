@@ -24,6 +24,13 @@ class InputController extends Controller
     {
         Log::info('[家計簿入力画面初期表示]' );
 
+        // 現在の年月に紐づく家計簿データの各項目の集計金額を取得
+        KakeiboLogic::setAggregateData_now($request);
+
+        $v = $request->session()->get('aggregateData')->toarray();
+        var_dump($v);
+
+
         // 画面表示
         return view('kakeibo.input');
     }
