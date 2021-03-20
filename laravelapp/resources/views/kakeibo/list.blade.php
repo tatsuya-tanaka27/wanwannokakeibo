@@ -37,4 +37,20 @@
         @endforeach
     </tbody>
 </table>
+<table id="aggregateDataTable" class="table table-sm table-responsive">
+    <thead class="table-info">
+        <tr>
+            <th>項目</th>
+            <th>合計金額</th>
+        </tr>
+    </thead>
+    <tbody id="aggregateData" class="table-light" align="center" nowrap>
+        @foreach(Session::get('aggregateData_dispDate') as $aggregateData)
+        <tr>
+            <td>{{$aggregateData->item_name}}</td>
+            <td>{{$aggregateData->total_amount}}</td>
+        </tr>
+        @endforeach
+    </tbody>
+</table>
 @endsection

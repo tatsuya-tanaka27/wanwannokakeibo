@@ -53,7 +53,7 @@ class KakeiboCommon
     */
     public static function getAggregateData($user_id, $startDate, $endDate){
 
-        return Kakeibo_data::selectRaw('item_id, item_name, SUM(amount)')
+        return Kakeibo_data::selectRaw('item_id, item_name, SUM(amount) as total_amount')
         ->where('user_id', $user_id)
         ->where('input_date', '>=' , $startDate)
         ->where('input_date', '<' , $endDate)

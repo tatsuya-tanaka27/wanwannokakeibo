@@ -35,6 +35,9 @@ class ListController extends Controller
         // 家計簿データ一覧をDBから取得して、セッションにセットする
         KakeiboLogic::setKakeiboData_dispDate($request, $dispDate);
 
+        // 表示年月に紐づく家計簿データの各項目の集計金額を取得して、セッションにセットする
+        KakeiboLogic::setAggregateData_dispDate($request, $dispDate);
+
         return view('kakeibo.list');
     }
 
@@ -48,17 +51,23 @@ class ListController extends Controller
     {
         Log::info('[家計簿一覧画面表示年月切替処理開始]' );
 
-        // 家計簿データ一覧をDBから取得して、セッションにセットする
+        // 表示年月に紐づく家計簿データをDBから取得して、セッションにセットする
         KakeiboLogic::setKakeiboData_dispDate($request, $request->dispDate);
 
-        // 家計簿データ一覧を取得
+        // 表示年月に紐づく家計簿データを取得
         $kakeiboData_dispDate = $request->session()->get('kakeiboData_dispDate');
 
-        // 画面再描画用のHTMLテキスト
-        $inner_html = "";
+        // 表示年月に紐づく家計簿データの各項目の集計金額を取得して、セッションにセットする
+        KakeiboLogic::setAggregateData_dispDate($request, $request->dispDate);
+
+        // 表示年月に紐づく家計簿データの各項目の集計金額を取得
+        $aggregateData_dispDate = $request->session()->get('aggregateData_dispDate');
+
+        // 家計簿データ用の画面再描画HTMLテキスト
+        $kakeiboData_html = "";
 
         foreach($kakeiboData_dispDate as $data){
-            $inner_html .= '<tr>' .
+            $kakeiboData_html .= '<tr>' .
                                 '<td>' . $data->item_name . '</td>' .
                                 '<td>' . $data->amount . '</td>' .
                                 '<td>' . $data->input_date . '</td>' .
@@ -67,8 +76,19 @@ class ListController extends Controller
                             '</tr>';
         }
 
+        // 集計金額用の画面再描画HTMLテキスト
+        $aggregateData_html = "";
+
+        foreach($aggregateData_dispDate as $aggregateData){
+            $aggregateData_html .= '<tr>' .
+                                '<td>' . $aggregateData->item_name . '</td>' .
+                                '<td>' . $aggregateData->total_amount . '</td>' .
+                            '</tr>';
+        }
+
         Log::info('[家計簿一覧画面表示年月切替処理終了]' );
 
-        return $inner_html;
+        return array('kakeiboData_html'=>$kakeiboData_html,
+                        'aggregateData_html'=>$aggregateData_html,);
     }
 }

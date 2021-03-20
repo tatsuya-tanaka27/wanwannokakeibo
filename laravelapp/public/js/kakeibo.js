@@ -16,10 +16,11 @@ $(function(){
         contentType: "application/json",
         data:JSON.stringify(json),
         //dataType:"json",
-    }).done(function(listData,textStatus,jqXHR) {
+    }).done(function(htmlData,textStatus,jqXHR) {
         //通信成功
         console.log("成功" + jqXHR.status);
-        $('#listData').html(listData);
+        $('#listData').html(htmlData['kakeiboData_html']);
+        $('#aggregateData').html(htmlData['aggregateData_html']);
 
         //$("#p1").text(jqXHR.status);  //例：200とかでステータスがとれます
         //$("#p2").text(JSON.stringify(data1));  //文字列に変換する例
