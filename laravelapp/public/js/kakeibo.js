@@ -1,8 +1,8 @@
 $(function(){
- $('#disp_date').change(function() {
+ $('#dispDate').change(function() {
 
       var json = {
-        "disp_date": $(this).val()
+        "dispDate": $(this).val()
     };
 
     //これを忘れがち

@@ -118,19 +118,55 @@ class KakeiboLogic
     }
 
     /**
-    *  現在の月の家計簿入力データセット処理
+    *  現在の年月の家計簿入力データセット処理
     *
     * @param $request リクエストパラメータ
     */
     public static function setKakeiboData_now($request)
     {
-        // 家計簿入力データをDBから取得
-        $kakeiboData = KakeiboCommon::getKakeiboData_now($request->session()->get('userData')->user_id);
+        // SQL検索用の日付パラメータ設定
+        $temp_startDate = Carbon::now('Asia/Tokyo'); // 現在日付を日付型に変換
+        $temp_endDate = clone $temp_startDate; // 開始月をディープコピーしたものを終了月とする
+        $temp_endDate = $temp_endDate->firstOfMonth()->addMonth()->endOfMonth(); // 翌月を取得（addMonthのバグ対策）
+        $temp_startDate = $temp_startDate->firstOfMonth(); // 開始月の初日
+        $temp_endDate = $temp_endDate->firstOfMonth(); // 翌月の初日
+        $startDate = $temp_startDate->format('Y-m-d'); // 開始月をY-m-dの形式に変換
+        $endDate = $temp_endDate->format('Y-m-d'); // 開始月をY-m-dの形式に変換
 
-        Log::debug('家計簿入力データ：' . $kakeiboData );
+        // 家計簿入力データをDBから取得
+        $kakeiboData_now = KakeiboCommon::getKakeiboData($request->session()->get('userData')->user_id, $startDate, $endDate);
+
+        Log::debug('現在の年月の家計簿入力データ：' . $kakeiboData_now );
 
         // 家計簿入力データをセッションにセット
-        $request->session()->put('kakeiboData', $kakeiboData);
+        $request->session()->put('kakeiboData_now', $kakeiboData_now);
+
+    }
+
+    /**
+    *  表示する年月に紐づく家計簿データ一覧のセット処理
+    *
+    * @param $request リクエストパラメータ
+    * @param $dispDate 表示年月
+    */
+    public static function setKakeiboData_dispDate($request, $dispDate)
+    {
+        // SQL検索用の日付パラメータ設定
+        $temp_startDate = new Carbon($dispDate); // 表示対象日付を日付型に変換
+        $temp_endDate = clone $temp_startDate; // 開始月をディープコピーしたものを終了月とする
+        $temp_endDate = $temp_endDate->firstOfMonth()->addMonth()->endOfMonth(); // 翌月を取得（addMonthのバグ対策）
+        $temp_startDate = $temp_startDate->firstOfMonth(); // 開始月の初日
+        $temp_endDate = $temp_endDate->firstOfMonth(); // 翌月の初日
+        $startDate = $temp_startDate->format('Y-m-d'); // 開始月をY-m-dの形式に変換
+        $endDate = $temp_endDate->format('Y-m-d'); // 開始月をY-m-dの形式に変換
+
+        // 表示年月に紐づいた家計簿入力データをDBから取得
+        $kakeiboData_dispDate = KakeiboCommon::getKakeiboData($request->session()->get('userData')->user_id, $startDate, $endDate);
+
+        Log::debug('表示年月の家計簿データ一覧：' . $kakeiboData_dispDate );
+
+        // 家計簿データ一覧をセッションにセット
+        $request->session()->put('kakeiboData_dispDate', $kakeiboData_dispDate);
 
     }
 
@@ -141,13 +177,48 @@ class KakeiboLogic
     */
     public static function setAggregateData_now($request)
     {
-        // 家計簿入力データをDBから取得
-        $aggregateData = KakeiboCommon::getAggregateData_now($request->session()->get('userData')->user_id);
+        // SQL検索用の日付パラメータ設定
+        $temp_startDate = Carbon::now('Asia/Tokyo'); // 現在日付を日付型に変換
+        $temp_endDate = clone $temp_startDate; // 開始月をディープコピーしたものを終了月とする
+        $temp_endDate = $temp_endDate->firstOfMonth()->addMonth()->endOfMonth(); // 翌月を取得（addMonthのバグ対策）
+        $temp_startDate = $temp_startDate->firstOfMonth(); // 開始月の初日
+        $temp_endDate = $temp_endDate->firstOfMonth(); // 翌月の初日
+        $startDate = $temp_startDate->format('Y-m-d'); // 開始月をY-m-dの形式に変換
+        $endDate = $temp_endDate->format('Y-m-d'); // 開始月をY-m-dの形式に変換
 
-        Log::debug('家計簿データの各項目の集計金額：' . $aggregateData );
+        // 現在の年月に紐づく家計簿入力データをDBから取得
+        $aggregateData_now = KakeiboCommon::getAggregateData($request->session()->get('userData')->user_id, $startDate, $endDate);
 
-        // 家計簿入力データをセッションにセット
-        $request->session()->put('aggregateData', $aggregateData);
+        Log::debug('家計簿データの各項目の集計金額：' . $aggregateData_now );
+
+        // 現在の年月に紐づく家計簿入力データをセッションにセット
+        $request->session()->put('aggregateData_now', $aggregateData_now);
+
+    }
+
+    /**
+    *  表示する年月に紐づく家計簿データの各項目の集計金額のセット処理
+    *
+    * @param $request リクエストパラメータ
+    */
+    public static function setAggregateData_dispDate($request, $dispDate)
+    {
+        // SQL検索用の日付パラメータ設定
+        $temp_startDate = new Carbon($dispDate); // 表示対象日付を日付型に変換
+        $temp_endDate = clone $temp_startDate; // 開始月をディープコピーしたものを終了月とする
+        $temp_endDate = $temp_endDate->firstOfMonth()->addMonth()->endOfMonth(); // 翌月を取得（addMonthのバグ対策）
+        $temp_startDate = $temp_startDate->firstOfMonth(); // 開始月の初日
+        $temp_endDate = $temp_endDate->firstOfMonth(); // 翌月の初日
+        $startDate = $temp_startDate->format('Y-m-d'); // 開始月をY-m-dの形式に変換
+        $endDate = $temp_endDate->format('Y-m-d'); // 開始月をY-m-dの形式に変換
+
+        // 表示する年月に紐づく家計簿入力データをDBから取得
+        $aggregateData_dispDate = KakeiboCommon::getAggregateData($request->session()->get('userData')->user_id, $startDate, $endDate);
+
+        Log::debug('表示する年月に紐づく家計簿データの各項目の集計金額：' . $aggregateData_dispDate );
+
+        // 表示する年月に紐づく家計簿入力データをセッションにセット
+        $request->session()->put('aggregateData', $aggregateData_dispDate);
 
     }
 
@@ -261,11 +332,11 @@ class KakeiboLogic
     */
     public static function setKakeiboDateList($request)
     {
-        // 全ての家計簿入力データをDBから取得
-        $allKakeiboData = KakeiboCommon::getKakeiboData($request->session()->get('userData')->user_id);
+        // ユーザーに紐づく全ての家計簿入力データをDBから取得
+        $allKakeiboData_all = KakeiboCommon::getKakeiboData_all($request->session()->get('userData')->user_id);
 
         // 家計簿入力データをセッションから取得して、配列かする
-        $kakeiboDataArray = $allKakeiboData->toArray();
+        $kakeiboDataArray = $allKakeiboData_all->toArray();
 
         // 家計簿入力データ年月リスト
         $KakeiboDateList = array();
@@ -308,27 +379,6 @@ class KakeiboLogic
 
         // 年月リストをセッションにセット
         $request->session()->put('KakeiboDateList', array_reverse($KakeiboDateList));
-    }
-
-    /**
-    *  家計簿データ一覧のセット処理
-    *
-    * @param $request リクエストパラメータ
-    * @param $disp_date 表示年月
-    */
-    public static function setKakeiboList($request, $disp_date)
-    {
-        // 年月リストを取得
-        $KakeiboDateList = $request->session()->get('KakeiboDateList');
-
-        // 表示年月に紐づいた家計簿入力データをDBから取得
-        $kakeiboList = KakeiboCommon::getKakeiboData_date($request->session()->get('userData')->user_id, $disp_date);
-
-        Log::debug('家計簿データ一覧：' . $kakeiboList );
-
-        // 家計簿データ一覧をセッションにセット
-        $request->session()->put('kakeiboList', $kakeiboList);
-
     }
 }
 ?>

@@ -7,7 +7,7 @@
 <div id="date-area">
     <div>
         <span>日付：</span>
-        <select id="disp_date" name="disp_date" class="input_item">
+        <select id="dispDate" name="dispDate" class="input_item">
             @foreach(Session::get('KakeiboDateList') as $KakeiboDate)
             <option value="{{$KakeiboDate['year'] . '-' . $KakeiboDate['month']}}">
                 {{$KakeiboDate['year'] . '年' . $KakeiboDate['month'] . '月'}}</option>
@@ -26,7 +26,7 @@
         </tr>
     </thead>
     <tbody id="listData" class="table-light" align="center" nowrap>
-        @foreach(Session::get('kakeiboList') as $data)
+        @foreach(Session::get('kakeiboData_dispDate') as $data)
         <tr>
             <td>{{$data->item_name}}</td>
             <td>{{$data->amount}}</td>

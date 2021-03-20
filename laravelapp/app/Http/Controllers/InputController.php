@@ -27,7 +27,7 @@ class InputController extends Controller
         // 現在の年月に紐づく家計簿データの各項目の集計金額を取得
         KakeiboLogic::setAggregateData_now($request);
 
-        $v = $request->session()->get('aggregateData')->toarray();
+        $v = $request->session()->get('aggregateData_now')->toarray();
         var_dump($v);
 
 

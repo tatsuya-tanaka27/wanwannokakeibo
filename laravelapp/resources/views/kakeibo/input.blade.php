@@ -42,7 +42,7 @@
     </tbody>
 </table>
 <table id="inputListTable" class="table table-sm table-responsive">
-    <thead class="table-info">
+    <thead class="table-info col-xs-3 col-ms-3 col-md-4 col-lg-4">
         <tr>
             <th>項目</th>
             <th>金額</th>
@@ -54,7 +54,7 @@
         </tr>
     </thead>
     <tbody class="table-light" align="center" nowrap>
-        @foreach(Session::get('kakeiboData') as $data)
+        @foreach(Session::get('kakeiboData_now') as $data)
         <form id="kakeiboData{{$data->id}}" name="update-form" class="" action="/wanwannokakeibo/update" method="post">
             @csrf
             <input id="kakeiboDataId{{$data->id}}" type="hidden" name="update_id" value="{{$data->id}}">

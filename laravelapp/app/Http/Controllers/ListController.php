@@ -30,10 +30,10 @@ class ListController extends Controller
         $KakeiboDate = $KakeiboDateList[0];
 
         // 表示用の年月を設定
-        $disp_date = $KakeiboDate['year'] . '-' . $KakeiboDate['month'];
+        $dispDate = $KakeiboDate['year'] . '-' . $KakeiboDate['month'];
 
         // 家計簿データ一覧をDBから取得して、セッションにセットする
-        KakeiboLogic::setKakeiboList($request, $disp_date);
+        KakeiboLogic::setKakeiboData_dispDate($request, $dispDate);
 
         return view('kakeibo.list');
     }
@@ -49,15 +49,15 @@ class ListController extends Controller
         Log::info('[家計簿一覧画面表示年月切替処理開始]' );
 
         // 家計簿データ一覧をDBから取得して、セッションにセットする
-        KakeiboLogic::setKakeiboList($request, $request->disp_date);
+        KakeiboLogic::setKakeiboData_dispDate($request, $request->dispDate);
 
         // 家計簿データ一覧を取得
-        $kakeiboList = $request->session()->get('kakeiboList');
+        $kakeiboData_dispDate = $request->session()->get('kakeiboData_dispDate');
 
         // 画面再描画用のHTMLテキスト
         $inner_html = "";
 
-        foreach($kakeiboList as $data){
+        foreach($kakeiboData_dispDate as $data){
             $inner_html .= '<tr>' .
                                 '<td>' . $data->item_name . '</td>' .
                                 '<td>' . $data->amount . '</td>' .
