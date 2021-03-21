@@ -13,22 +13,6 @@
     </head>
 
     <body>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-1">col-md-1</div>
-                <div class="col-md-1">col-md-1</div>
-                <div class="col-md-1">col-md-1</div>
-                <div class="col-md-1">col-md-1</div>
-                <div class="col-md-1">col-md-1</div>
-                <div class="col-md-1">col-md-1</div>
-                <div class="col-md-1">col-md-1</div>
-                <div class="col-md-1">col-md-1</div>
-                <div class="col-md-1">col-md-1</div>
-                <div class="col-md-1">col-md-1</div>
-                <div class="col-md-1">col-md-1</div>
-                <div class="col-md-1">col-md-1</div>
-            </div>
-        </div>
         <section id="header-area">
             <header class="d-flex p-2 bd-highlight">
                 <img class="img-fluid" src="/images/inu80.png" alt="わんわん" />

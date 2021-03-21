@@ -10,7 +10,6 @@
             <th>項目</th>
             <th>金額</th>
             <th>日付</th>
-            <th>支払人</th>
             <th>備考</th>
             <th></th>
         </tr>
@@ -29,9 +28,6 @@
                     <input type="date" name="date" />
                 </td>
                 <td>
-                    <input type="text" name="payer" class="" value="テスト" />
-                </td>
-                <td>
                     <input type="text" name="remarks" class="" value="テスト値" />
                 </td>
                 <td>
@@ -47,7 +43,6 @@
             <th>項目</th>
             <th>金額</th>
             <th>日付</th>
-            <th>支払人</th>
             <th>備考</th>
             <th></th>
             <th></th>
@@ -62,7 +57,6 @@
                 <td>{{Form::select('item', Session::get('inputItems'), $data->item_id)}}</td>
                 <td><input type="number" name="amount" value="{{$data->amount}}"></td>
                 <td><input type="date" name="date" value="{{$data->input_date}}"></td>
-                <td><input type="text" name="payer" value="{{$data->payer}}"></td>
                 <td><input type="text" name="remarks" value="{{$data->remarks}}"></td>
                 <td>
                     <input type="submit" name="update" value="更新" />

@@ -71,7 +71,6 @@ class ListController extends Controller
                                 '<td>' . $data->item_name . '</td>' .
                                 '<td>' . $data->amount . '</td>' .
                                 '<td>' . $data->input_date . '</td>' .
-                                '<td>' . $data->payer . '</td>' .
                                 '<td>' . $data->remarks . '</td>' .
                             '</tr>';
         }

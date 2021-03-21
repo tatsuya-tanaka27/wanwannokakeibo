@@ -21,7 +21,6 @@
             <th>項目</th>
             <th>金額</th>
             <th>日付</th>
-            <th>支払人</th>
             <th>備考</th>
         </tr>
     </thead>
@@ -31,7 +30,6 @@
             <td>{{$data->item_name}}</td>
             <td>{{$data->amount}}</td>
             <td>{{$data->input_date}}</td>
-            <td>{{$data->payer}}</td>
             <td>{{$data->remarks}}</td>
         </tr>
         @endforeach
