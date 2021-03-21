@@ -78,10 +78,10 @@ class KakeiboLogic
         // 画面から取得した値をDBに登録する値として設定
         $param += array(
             'user_id' => $request->session()->get('userData')->user_id,
-            'item_id' => $request->item,
-            'item_name' => $inputItems[$request->item],
+            'item_id' => $request->item_id,
+            'item_name' => $inputItems[$request->item_id],
             'amount' => $request->amount,
-            'input_date' => $request->date,
+            'input_date' => $request->input_date,
             'payer' => $request->payer,
             'remarks' => $request->remarks,
             'del_flg' => 0,

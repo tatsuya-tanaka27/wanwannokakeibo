@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Logic\KakeiboLogic;
+use App\Models\Kakeibo_item_mst;
 
 /**
  * 家計簿項目登録画面コントローラー
@@ -13,7 +14,7 @@ use App\Logic\KakeiboLogic;
  */
 class RegistrationController extends Controller
 {
-        /**
+    /**
     * 家計簿項目登録画面初期表示
     *
     * @param Request $request リクエストパラメーター
@@ -35,6 +36,9 @@ class RegistrationController extends Controller
     public function insert(Request $request)
     {
         Log::info('[家計簿項目登録画面登録処理開始]' );
+
+        // バリデーションチェック
+        $this->validate($request, Kakeibo_item_mst::$rules);
 
         // DB登録用のパラメータを取得
         $param = KakeiboLogic::getUserItemsParam($request, true);
@@ -81,6 +85,9 @@ class RegistrationController extends Controller
     public function update(Request $request)
     {
         Log::info('[家計簿項目登録画面更新処理開始]' );
+
+        // バリデーションチェック
+        $this->validate($request, Kakeibo_item_mst::$rules);
 
         // DB更新用のパラメータを取得
         $param = KakeiboLogic::getUserItemsParam($request, false);

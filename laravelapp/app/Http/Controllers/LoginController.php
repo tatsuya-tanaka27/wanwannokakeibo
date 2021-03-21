@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Logic\KakeiboLogic;
+use App\Models\Kakeibo_user;
 
 /**
  * ログインコントローラー
@@ -33,6 +34,9 @@ class LoginController extends Controller
     public function post(Request $request)
     {
         Log::info('[ログイン処理開始]' );
+
+        // バリデーションチェック
+        $this->validate($request, Kakeibo_user::$rules);
 
         // ユーザー情報をセッションにセットする
         KakeiboLogic::setUser($request);

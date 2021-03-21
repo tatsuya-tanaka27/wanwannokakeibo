@@ -19,13 +19,13 @@
             @csrf
             <tr>
                 <td>
-                    {{Form::select('item', Session::get('inputItems'))}}
+                    {{Form::select('item_id', Session::get('inputItems'), null, ['placeholder'=>'選択してください'])}}
                 </td>
                 <td>
                     <input type="number" name="amount" class="" value="" />
                 </td>
                 <td>
-                    <input type="date" name="date" />
+                    <input type="date" name="input_date" />
                 </td>
                 <td>
                     <input type="text" name="remarks" class="" value="テスト値" />
@@ -54,9 +54,10 @@
             @csrf
             <input id="kakeiboDataId{{$data->id}}" type="hidden" name="update_id" value="{{$data->id}}">
             <tr id="kakeiboDataDataTr{{$data->id}}">
-                <td>{{Form::select('item', Session::get('inputItems'), $data->item_id)}}</td>
+                <td>{{Form::select('item', Session::get('inputItems'), $data->item_id, ['placeholder'=>'選択してください'])}}
+                </td>
                 <td><input type="number" name="amount" value="{{$data->amount}}"></td>
-                <td><input type="date" name="date" value="{{$data->input_date}}"></td>
+                <td><input type="date" name="input_date" value="{{$data->input_date}}"></td>
                 <td><input type="text" name="remarks" value="{{$data->remarks}}"></td>
                 <td>
                     <input type="submit" name="update" value="更新" />

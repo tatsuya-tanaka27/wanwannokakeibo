@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
 use App\Logic\KakeiboLogic;
+use App\Models\Kakeibo_data;
 
 /**
  * 家計簿入力画面コントローラー
@@ -44,6 +45,9 @@ class InputController extends Controller
     {
         Log::info('[家計簿入力画面登録処理開始]' );
 
+        // バリデーションチェック
+        $this->validate($request, Kakeibo_data::$rules);
+
         // DB登録用のパラメータを取得
         $param = KakeiboLogic::getDataParam($request, true);
 
@@ -52,6 +56,9 @@ class InputController extends Controller
 
         // 家計簿入力データをDBから再取得して、画面表示用のデータを洗い替え
         KakeiboLogic::setKakeiboData_now($request);
+
+        // 現在の年月に紐づく家計簿データの各項目の集計金額を取得
+        KakeiboLogic::setAggregateData_now($request);
 
         Log::info('[家計簿入力画面登録処理終了]' );
 
@@ -69,6 +76,9 @@ class InputController extends Controller
     {
         Log::info('[家計簿入力画面更新処理開始]' );
 
+        // バリデーションチェック
+        $this->validate($request, Kakeibo_data::$rules);
+
         // DB更新用のパラメータを取得
         $param = KakeiboLogic::getDataParam($request, false);
 
@@ -77,6 +87,9 @@ class InputController extends Controller
 
         // 家計簿入力データをDBから再取得して、画面表示用のデータを洗い替え
         KakeiboLogic::setKakeiboData_now($request);
+
+        // 現在の年月に紐づく家計簿データの各項目の集計金額を取得
+        KakeiboLogic::setAggregateData_now($request);
 
         Log::info('[家計簿入力画面更新処理終了]' );
 
@@ -99,6 +112,9 @@ class InputController extends Controller
 
         // 家計簿入力データをDBから再取得して、画面表示用のデータを洗い替え
         KakeiboLogic::setKakeiboData_now($request);
+
+        // 現在の年月に紐づく家計簿データの各項目の集計金額を取得
+        KakeiboLogic::setAggregateData_now($request);
 
         Log::info('[家計簿入力画面削除処理終了]' );
 
