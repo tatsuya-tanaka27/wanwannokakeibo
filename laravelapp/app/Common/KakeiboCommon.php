@@ -58,7 +58,6 @@ class KakeiboCommon
         ->where('input_date', '>=' , $startDate)
         ->where('input_date', '<' , $endDate)
         ->groupBy('item_id', 'item_name')
-        ->orderBy('item_id', 'asc')
         ->get();
     }
 
