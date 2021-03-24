@@ -92,6 +92,10 @@
                         <td>{{$aggregateData->total_amount}}</td>
                     </tr>
                     @endforeach
+                    <tr>
+                        <td>収支合計</td>
+                        <td>{{Session::get('total_amount')}}</td>
+                    </tr>
                 </tbody>
             </table>
         </div>

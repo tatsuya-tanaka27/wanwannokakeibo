@@ -28,8 +28,24 @@ class InputController extends Controller
         // 現在の年月に紐づく家計簿データの各項目の集計金額を取得
         KakeiboLogic::setAggregateData_now($request);
 
-        //$v = $request->session()->get('aggregateData_now')->toarray();
-        //var_dump($v);
+        $temp_array = $request->session()->get('aggregateData_now')->toarray();
+        // var_dump($temp_array);
+
+        $total_amount = 0;
+
+        // if(isset($temp_array['income'])){
+        //     $total_amount = $temp_array['income'];
+        // }
+
+        foreach($temp_array as $temp){
+            if($temp['item_id'] === 'income'){
+                $total_amount += $temp['total_amount'];
+            } else {
+                $total_amount -= $temp['total_amount'];
+            }
+        }
+
+        $request->session()->put('total_amount', $total_amount);
 
         // 画面表示
         return view('kakeibo.input');
