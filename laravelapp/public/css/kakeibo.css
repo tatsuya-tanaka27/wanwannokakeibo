@@ -10,16 +10,16 @@
 }
 
 #login-guide-table {
-    width: 99%;
+    /* width: 99%; */
 }
 
 #login-guide-legend {
-    width: auto;
+    /* width: auto; */
     margin-left: 1em;
 }
 
 #login-form {
-    margin-top: -125px;
+    margin-top: -150px;
 }
 
 #login-submit:hover {
@@ -49,6 +49,10 @@
 }
 
 /* 入力画面用スタイル */
+
+.select_item select {
+    width: 100% !important;
+}
 
 /* 家計簿登録画面用スタイル */
 

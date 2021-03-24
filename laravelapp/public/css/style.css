@@ -3,7 +3,7 @@
 
 /* 外部スタイル start */
 .wf-nicomoji {
-	font-family: "Nico Moji" !important;
+    font-family: "Nico Moji" !important;
 }
 
 /* 外部スタイル end */
@@ -11,44 +11,49 @@
 /* 共通スタイル start */
 
 html {
-	width: 100%;
-	height: 100%;
-	font-family: sans-serif;
+    /* width: 100%; */
+    /* height: 100%; */
+    font-family: sans-serif;
 }
 
 body {
-	background-color: honeydew;
+    background-color: honeydew;
 }
 
-table {
-	margin: 10px auto;
+.solid-border {
+    border: solid 1.5px #000000 !important;
+    border-collapse: collapse !important;
 }
 
-th {
-	text-align: center;
-	border: 1px black solid;
-}
+/* table {
+    margin: 10px auto;
+} */
 
-td {
-	border: 1px black solid;
-}
+/* th {
+    text-align: center;
+    border: 1px black solid;
+} */
 
-img {
-	margin: 0px;
-	padding: 0px;
-}
+/* td {
+    border: 1px black solid;
+} */
+
+/* img {
+    margin: 0px;
+    padding: 0px;
+} */
 
 a:hover {
-	opacity: 0.7;
+    opacity: 0.7;
 }
 
 h1 {
-	color: pink !important;
+    color: pink !important;
 }
 
 #top-link-title:hover {
-	opacity: 0.5;
-	cursor: pointer;
+    opacity: 0.5;
+    cursor: pointer;
 }
 
 #wrapper {
@@ -58,42 +63,42 @@ main {
 }
 
 #header-area {
-	background-color: lightcyan;
+    background-color: lightcyan;
 }
 
 header {
-	width: 100%;
+    /* width: 100%; */
 }
 
 header img {
-	margin-top: -15px;
+    margin-top: -15px;
 }
 
 #user-area {
-	margin: 0px !important;
-	padding: 0px !important;
+    margin: 0px !important;
+    padding: 0px !important;
 }
 
 #footer-area {
-	background-color: lightgreen;
-	text-align: center;
+    background-color: lightgreen;
+    text-align: center;
 }
 
 small {
-	color: gray;
+    color: gray;
 }
 
 .ma {
-	margin: auto;
+    margin: auto;
 }
 
 .cb {
-	/* floatを解除 */
-	clear: both;
+    /* floatを解除 */
+    clear: both;
 }
 
 .ts {
-	text-align: center;
+    text-align: center;
 }
 
 /* 共通スタイル end */
@@ -101,98 +106,98 @@ small {
 /* ハンバーガーメニュー用のスタイル start */
 
 .menu-btn {
-	position: fixed;
-	top: 10px;
-	right: 10px;
-	display: flex;
-	height: 60px;
-	width: 60px;
-	justify-content: center;
-	align-items: center;
-	z-index: 90;
-	background-color: #3584bb;
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    height: 60px;
+    width: 60px;
+    justify-content: center;
+    align-items: center;
+    z-index: 90;
+    background-color: #3584bb;
 }
 .menu-btn span,
 .menu-btn span:before,
 .menu-btn span:after {
-	content: "";
-	display: block;
-	height: 3px;
-	width: 25px;
-	border-radius: 3px;
-	background-color: #ffffff;
-	position: absolute;
+    content: "";
+    display: block;
+    height: 3px;
+    width: 25px;
+    border-radius: 3px;
+    background-color: #ffffff;
+    position: absolute;
 }
 .menu-btn span:before {
-	bottom: 8px;
+    bottom: 8px;
 }
 .menu-btn span:after {
-	top: 8px;
+    top: 8px;
 }
 
 #menu-btn-check:checked ~ .menu-btn span {
-	background-color: rgba(
-		255,
-		255,
-		255,
-		0
-	); /*メニューオープン時は真ん中の線を透明にする*/
+    background-color: rgba(
+        255,
+        255,
+        255,
+        0
+    ); /*メニューオープン時は真ん中の線を透明にする*/
 }
 #menu-btn-check:checked ~ .menu-btn span::before {
-	bottom: 0;
-	transform: rotate(45deg);
+    bottom: 0;
+    transform: rotate(45deg);
 }
 #menu-btn-check:checked ~ .menu-btn span::after {
-	top: 0;
-	transform: rotate(-45deg);
+    top: 0;
+    transform: rotate(-45deg);
 }
 
 #menu-btn-check {
-	display: none;
+    display: none;
 }
 
 .menu-content {
-	width: 20%;
-	height: 100%;
-	position: fixed;
-	top: 0;
-	right: 0; /*rightの値を変更してメニューを画面外へ*/
-	z-index: 80;
-	background-color: #3584bb;
-	transition: all 0.5s; /*アニメーション設定*/
-	display: none;
+    width: 20%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    right: 0; /*rightの値を変更してメニューを画面外へ*/
+    z-index: 80;
+    background-color: #3584bb;
+    transition: all 0.5s; /*アニメーション設定*/
+    display: none;
 }
 .menu-content ul {
-	padding: 70px 10px 0;
+    padding: 70px 10px 0;
 }
 .menu-content ul li {
-	border-bottom: solid 1px #ffffff;
-	list-style: none;
+    border-bottom: solid 1px #ffffff;
+    list-style: none;
 }
 .menu-content ul li a {
-	display: block;
-	width: 100%;
-	font-size: 15px;
-	box-sizing: border-box;
-	color: #ffffff;
-	text-decoration: none;
-	padding: 9px 15px 10px 0;
-	position: relative;
+    display: block;
+    width: 100%;
+    font-size: 15px;
+    box-sizing: border-box;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 9px 15px 10px 0;
+    position: relative;
 }
 .menu-content ul li a::before {
-	content: "";
-	width: 7px;
-	height: 7px;
-	border-top: solid 2px #ffffff;
-	border-right: solid 2px #ffffff;
-	transform: rotate(45deg);
-	position: absolute;
-	right: 11px;
-	top: 16px;
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-top: solid 2px #ffffff;
+    border-right: solid 2px #ffffff;
+    transform: rotate(45deg);
+    position: absolute;
+    right: 11px;
+    top: 16px;
 }
 
 #menu-btn-check:checked ~ .menu-content {
-	display: block;
+    display: block;
 }
 
 /* ハンバーガーメニュー用のスタイル end */

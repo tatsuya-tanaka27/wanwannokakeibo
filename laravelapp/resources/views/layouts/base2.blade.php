@@ -12,36 +12,55 @@
     </head>
 
     <body>
-        <section id="header-area">
-            <header class="d-flex p-2 bd-highlight">
-                <img class="img-fluid" src="/images/inu80.png" alt="わんわん" />
-                <h1 class="h1 wf-nicomoji">わんわんのカケイボ</h1>
-                <img class="img-fluid" src="/images/neko80.png" alt="にゃんにゃん" />
+        <section>
+            <header>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div id="header-area"
+                            class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 d-flex bd-highlight">
+                            <img class="img-fluid" src="/images/inu80.png" alt="わんわん" />
+                            <h1 class="h1 wf-nicomoji">わんわんのカケイボ</h1>
+                            <img class="img-fluid" src="/images/neko80.png" alt="にゃんにゃん" />
+                        </div>
+                    </div>
+                </div>
             </header>
         </section>
         <section>
-            @if(count($errors) > 0)
-            <div>
-                <ul>
-                    @foreach($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
+            <div class="container">
+                <div class="row">
+                    <div id="error-area" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        @if(count($errors) > 0)
+                        <div>
+                            <ul>
+                                @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
+                    </div>
+                </div>
             </div>
-            @endif
         </section>
         <section>
             <main>
                 @yield('content')
             </main>
         </section>
-        <section id="footer-area">
+        <section>
             <footer>
-                <img class="img-fluid" src="/images/softcream32.png" alt="そふとくん" />
-                <small>
-                    わんわんのカケイボ © 2021 タナカソルジャー All Rights Reserved.
-                </small>
-                <img class="img-fluid" src="/images/unchi32.png" alt="うんちくん" />
+                <div class="container-fluid">
+                    <div class="row">
+                        <div id="footer-area" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <img class="img-fluid" src="/images/softcream32.png" alt="そふとくん" />
+                            <small>
+                                わんわんのカケイボ © 2021 タナカソルジャー All Rights Reserved.
+                            </small>
+                            <img class="img-fluid" src="/images/unchi32.png" alt="うんちくん" />
+                        </div>
+                    </div>
+                </div>
             </footer>
         </section>
         <script src="{{ asset('js/app.js') }}"></script>

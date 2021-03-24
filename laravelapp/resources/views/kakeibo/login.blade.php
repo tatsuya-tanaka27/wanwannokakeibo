@@ -3,53 +3,37 @@
 @section('title', 'わんわんの家計簿 ログイン')
 
 @section('content')
-<div id="login-main" class="container d-flex bd-highlight justify-content-around">
+<div id="login-main" class="container d-flex bd-highlight justify-content-center">
     <div class="row">
         <div id="login-guide-area" class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
-            <h2 id="login-h2" class="h2" align="left">
-                わんわんの家計簿について
+            <h2 id="login-h2" class="h2 wf-nicomoji">
+                わんわんのカケイボについて
             </h2>
-            <fieldset class="border">
+            <fieldset id="guide-border" class="border">
                 <p>
-                    わんわんの家計簿では、家計簿をシンプルな操作で管理できますわん。
+                    わんわんの家計簿を管理している「わんわん」と申しますわん。<br>
+                    簡単な操作で家計簿を管理できるから、使ってみてくださいわん。
                 </p>
             </fieldset>
-            <div id="summary-area" class="d-flex p-2 bd-highlight">
-                <table id="summary-table">
-                    <tr>
-                        <th>creator</th>
-                        <td>タナカソルジャー</td>
-                    </tr>
-                    <tr>
-                        <th>language</th>
-                        <td>PHP,Javascript,HTML5,CSS3</td>
-                    </tr>
-                    <tr>
-                        <th>library</th>
-                        <td>laravel,bootstrap,Jquery</td>
-                    </tr>
-                    <tr>
-                        <th>server</th>
-                        <td>azure</td>
-                    </tr>
-                    <tr>
-                        <th>illustrator</th>
-                        <td>妻</td>
-                    </tr>
-                    <tr>
-                        <th>version</th>
-                        <td>1.0(初版)</td>
-                    </tr>
-                </table>
-                <div>
-                    <span></span>
+            <br>
+            <fieldset id="game-border" class="border">
+                <div class="d-flex">
+                    <div class="bd-highlight">
+                        <span>
+                            わんわんが大活躍するゲームがありますわん。<br>
+                            →のアイコンをクリックしたら、わんわんのげーむで遊べますわん。
+                        </span>
+                        <div class="d-flex">
+                        </div>
+                    </div>
                     <a href="https://wanwannogame.web.app/wanwannogame/index.html">
                         <img src="/images/game150.PNG" alt="わんわんのゲーム" />
                     </a>
                 </div>
-            </div>
+            </fieldset>
         </div>
-        <div id="login-area" class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+
+        <div id="login-area" class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12 justify-content-center">
             <div id="login-form-area" class="float-right">
                 <img class="img-fluid" src="/images/loginhome300.PNG" alt="ログインの家" />
                 <form id="login-form" name="login-form" class="text-center container" action="/wanwannokakeibo/login"
@@ -62,6 +46,8 @@
                         <br />
                         <input id="login-submit" type="image" class="img-fluid" src="/images/login100.PNG" name="login"
                             alt="ログイン">
+                        <br />
+                        <br />
                         <br />
                         <a href="/wanwannokakeibo/userRegistration">
                             <img class="img-fluid" src="/images/shinkitoroku150.PNG" alt="しんきとうろく" />
