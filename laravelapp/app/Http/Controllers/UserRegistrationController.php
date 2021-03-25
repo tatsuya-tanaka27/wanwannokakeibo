@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Models\Kakeibo_user;
 use Carbon\Carbon;
+use App\Logic\KakeiboLogic;
 
 /**
  * ユーザー登録画面コントローラー
@@ -52,13 +53,31 @@ class UserRegistrationController extends Controller
         $kakeibo_user->save();
         //$kakeibo_user->fill($form)->save();
 
-        $user_id = $request->user_id;
-        $password = $request->password;
+        // ユーザー情報をセッションにセットする
+        KakeiboLogic::setUser($request);
 
-        $userData = DB::table('kakeibo_users')
-        ->whereRaw('user_id = ? and password = ?', [$user_id, $password])->first();
+        // デフォルトの家計簿項目情報をセッションにセットする
+        KakeiboLogic::setKakeiboMst($request);
 
-        $request->session()->put('userData', $userData);
+        // ユーザー設定の家計簿項目情報をセッションにセットする
+        KakeiboLogic::setUserItems($request);
+
+        // 家計簿入力画面用の家計簿項目をセッションにセットする
+        KakeiboLogic::setInputItems($request);
+
+        // 現在の年月に紐づく家計簿入力データをDBから取得して、セッションにセットする
+        KakeiboLogic::setKakeiboData_now($request);
+
+        // 家計簿入力データに紐づく年月リストをセッションにセットする
+        KakeiboLogic::setKakeiboDateList($request);
+
+        // $user_id = $request->user_id;
+        // $password = $request->password;
+
+        // $userData = DB::table('kakeibo_users')
+        // ->whereRaw('user_id = ? and password = ?', [$user_id, $password])->first();
+
+        // $request->session()->put('userData', $userData);
 
         Log::info('[ユーザー登録処理終了]' );
 
