@@ -390,5 +390,32 @@ class KakeiboLogic
         // 年月リストをセッションにセット
         $request->session()->put('KakeiboDateList', array_reverse($KakeiboDateList));
     }
+
+    /**
+    * 収支合計の金額をセットする
+    *
+    * @param $request リクエストパラメータ
+    * @param $aggregateData 処理対象の家計簿合計金額データ
+    */
+    public static function setIncAndExp($request, $aggregateData)
+    {
+        // 処理対象の家計簿合計金額データを
+        $temp_array = $aggregateData->toarray();
+
+        // 収支合計の金額
+        $incAndExp = 0;
+
+        // 収入はプラス、それ以外はマイナスあとして合算
+        foreach($temp_array as $temp){
+            if($temp['item_id'] === 'income'){
+                $incAndExp += $temp['total_amount'];
+            } else {
+                $incAndExp -= $temp['total_amount'];
+            }
+        }
+
+        // 収支合計の金額をセット
+        $request->session()->put('incAndExp', $incAndExp);
+    }
 }
 ?>

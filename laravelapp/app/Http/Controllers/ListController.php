@@ -38,6 +38,12 @@ class ListController extends Controller
         // 表示年月に紐づく家計簿データの各項目の集計金額を取得して、セッションにセットする
         KakeiboLogic::setAggregateData_dispDate($request, $dispDate);
 
+        // 表示年月に紐づく家計簿データの各項目の集計金額を取得
+        $aggregateData = $request->session()->get('aggregateData_dispDate');
+
+        // 表示年月に紐づく収支合計の金額を取得
+        KakeiboLogic::setIncAndExp($request, $aggregateData);
+
         return view('kakeibo.list');
     }
 
@@ -63,9 +69,16 @@ class ListController extends Controller
         // 表示年月に紐づく家計簿データの各項目の集計金額を取得
         $aggregateData_dispDate = $request->session()->get('aggregateData_dispDate');
 
+        // 表示年月に紐づく家計簿データの各項目の集計金額を取得
+        $aggregateData = $request->session()->get('aggregateData_dispDate');
+
+        // 表示年月に紐づく収支合計の金額を取得
+        KakeiboLogic::setIncAndExp($request, $aggregateData);
+
         // 家計簿データ用の画面再描画HTMLテキスト
         $kakeiboData_html = "";
 
+        // 家計簿データ用HTML作成
         foreach($kakeiboData_dispDate as $data){
             $kakeiboData_html .= '<tr>' .
                                 '<td>' . $data->item_name . '</td>' .
@@ -84,6 +97,12 @@ class ListController extends Controller
                                 '<td>' . $aggregateData->total_amount . '</td>' .
                             '</tr>';
         }
+
+        // 最後に終始合計の金額を設定
+        $aggregateData_html .= '<tr>' .
+                                '<td>' . '<span class="font-weight-bold">' . '収支合計' . '</sapn>' . '</td>' .
+                                '<td>' . '<span class="font-weight-bold">' . $request->session()->get('incAndExp') . '</sapn>'  . '</td>' .
+                            '</tr>';
 
         Log::info('[家計簿一覧画面表示年月切替処理終了]' );
 

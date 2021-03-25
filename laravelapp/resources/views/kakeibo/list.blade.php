@@ -51,6 +51,14 @@
                         <td>{{$aggregateData->total_amount}}</td>
                     </tr>
                     @endforeach
+                    <tr>
+                        <td>
+                            <span class="font-weight-bold">収支合計</span>
+                        </td>
+                        <td>
+                            <span class="font-weight-bold">{{Session::get('incAndExp')}}</span>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>

@@ -93,8 +93,12 @@
                     </tr>
                     @endforeach
                     <tr>
-                        <td>収支合計</td>
-                        <td>{{Session::get('total_amount')}}</td>
+                        <td>
+                            <span class="font-weight-bold">収支合計</span>
+                        </td>
+                        <td>
+                            <span class="font-weight-bold">{{Session::get('incAndExp')}}</span>
+                        </td>
                     </tr>
                 </tbody>
             </table>
