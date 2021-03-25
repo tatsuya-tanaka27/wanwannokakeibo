@@ -38,10 +38,11 @@
                     </form>
                 </tbody>
             </table>
+            @if(count(Session::get('kakeiboData_now')) > 0)
             <table id="inputListTable" class="table table-sm solid-border">
                 <thead class="table-info">
                     <tr>
-                        <th colspan="3">家計簿登録</th>
+                        <th colspan="3">家計簿修正・削除</th>
                     </tr>
                 </thead>
                 @foreach(Session::get('kakeiboData_now') as $data)
@@ -103,6 +104,7 @@
                 </tbody>
             </table>
         </div>
+        @endif
     </div>
 </div>
 @endsection

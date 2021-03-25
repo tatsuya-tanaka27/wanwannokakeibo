@@ -10,10 +10,13 @@
                 わんわんのカケイボについて
             </h2>
             <fieldset id="guide-border" class="border">
-                <p>
-                    わんわんの家計簿を管理している「わんわん」と申しますわん。<br>
-                    簡単な操作で家計簿を管理できるから、使ってみてくださいわん。
-                </p>
+                <div class="d-flex">
+                    <span>
+                        わんわんの家計簿を管理している「わんわん」と申しますわん。<br>
+                        簡単な操作で家計簿を管理できるから、使ってみてくださいわん。
+                    </span>
+                    <img src="/images/inu_hon100.png" alt="わんわんのほん" />
+                </div>
             </fieldset>
             <br>
             <fieldset id="game-border" class="border">
@@ -21,14 +24,15 @@
                     <div class="bd-highlight">
                         <span>
                             わんわんが大活躍するゲームがありますわん。<br>
-                            →のアイコンをクリックしたら、わんわんのげーむで遊べますわん。
+                            下記のリンクをクリックしたら、わんわんのげーむで遊べますわん。
                         </span>
-                        <div class="d-flex">
-                        </div>
+                        <br>
+                        <br>
+                        <a href="https://wanwannogame.web.app/wanwannogame/index.html">
+                            わんわんのゲームはここをクリックするんだわん
+                        </a>
                     </div>
-                    <a href="https://wanwannogame.web.app/wanwannogame/index.html">
-                        <img src="/images/game150.PNG" alt="わんわんのゲーム" />
-                    </a>
+                    <img src="/images/game150.PNG" alt="わんわんのゲーム" />
                 </div>
             </fieldset>
         </div>

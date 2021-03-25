@@ -21,6 +21,14 @@ class LoginController extends Controller
     */
     public function index(Request $request)
     {
+        // セッション初期化
+        $request->session()->forget('inputItems');
+        $request->session()->forget('kakeiboData_now');
+        $request->session()->forget('aggregateData_now');
+        $request->session()->forget('KakeiboDateList');
+        $request->session()->forget('kakeiboData_dispDate');
+        $request->session()->forget('aggregateData_dispDate');
+
         Log::info('[ログイン画面初期表示]' );
         return view('kakeibo.login');
     }
@@ -74,8 +82,13 @@ class LoginController extends Controller
 
         Log::info('[USER_NAME：' . $userData->user_name . '　USER_ID：'. $userData->user_id . ']'. 'がログインしました。' );
 
+        // セッション初期化
         $request->session()->forget('inputItems');
-        $request->session()->forget('kakeiboData');
+        $request->session()->forget('kakeiboData_now');
+        $request->session()->forget('aggregateData_now');
+        $request->session()->forget('KakeiboDateList');
+        $request->session()->forget('kakeiboData_dispDate');
+        $request->session()->forget('aggregateData_dispDate');
 
         // セッションから全データを削除する
         //$request->session()->flush();

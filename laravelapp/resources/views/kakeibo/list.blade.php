@@ -17,6 +17,7 @@
                 </select>
             </div>
         </div>
+        @if(count(Session::get('kakeiboData_dispDate')) > 0)
         <div class="table-responsive d-xl-flex d-lg-flex d-md-flex justify-content-center">
             <table id="listTable" class="table table-sm solid-border">
                 <thead class="table-info" align="center" nowrap>
@@ -62,6 +63,7 @@
                 </tbody>
             </table>
         </div>
+        @endif
     </div>
 </div>
 @endsection

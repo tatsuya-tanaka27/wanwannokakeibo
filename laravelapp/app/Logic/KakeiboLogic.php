@@ -26,8 +26,10 @@ class KakeiboLogic
         $user_id = $request->user_id;
         $password = $request->password;
 
-        $userData = Kakeibo_user::where('user_id',$user_id)->where('password', $password)->first();
+        $userData = Kakeibo_user::where('user_id',$user_id)->first();
         //DB::table('kakeibo_users')->whereRaw('user_id = ? and password = ?', [$user_id, $password])->first();
+
+        //$password = Crypt::decryptString($request->password);
 
         Log::debug('ユーザー情報：' . $userData);
 

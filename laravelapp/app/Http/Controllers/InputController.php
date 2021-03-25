@@ -63,6 +63,12 @@ class InputController extends Controller
         // 現在の年月に紐づく家計簿データの各項目の集計金額を取得
         KakeiboLogic::setAggregateData_now($request);
 
+        // 現在の年月に紐づく家計簿データの各項目の集計金額を取得
+        $aggregateData = $request->session()->get('aggregateData_now');
+
+        // 現在の年月に紐づく収支合計の金額を取得
+        KakeiboLogic::setIncAndExp($request, $aggregateData);
+
         Log::info('[家計簿入力画面登録処理終了]' );
 
         // 画面表示
@@ -94,6 +100,12 @@ class InputController extends Controller
         // 現在の年月に紐づく家計簿データの各項目の集計金額を取得
         KakeiboLogic::setAggregateData_now($request);
 
+        // 現在の年月に紐づく家計簿データの各項目の集計金額を取得
+        $aggregateData = $request->session()->get('aggregateData_now');
+
+        // 現在の年月に紐づく収支合計の金額を取得
+        KakeiboLogic::setIncAndExp($request, $aggregateData);
+
         Log::info('[家計簿入力画面更新処理終了]' );
 
         // 画面表示
@@ -118,6 +130,12 @@ class InputController extends Controller
 
         // 現在の年月に紐づく家計簿データの各項目の集計金額を取得
         KakeiboLogic::setAggregateData_now($request);
+
+        // 現在の年月に紐づく家計簿データの各項目の集計金額を取得
+        $aggregateData = $request->session()->get('aggregateData_now');
+
+        // 現在の年月に紐づく収支合計の金額を取得
+        KakeiboLogic::setIncAndExp($request, $aggregateData);
 
         Log::info('[家計簿入力画面削除処理終了]' );
 
