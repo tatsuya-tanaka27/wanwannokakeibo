@@ -35,8 +35,6 @@ class KakeiboLogic
 
         $request->session()->put('userData', $userData);
         //$request->session()->put(['key1' => 'value1', 'key2' => 'value2']);
-
-        Log::info('[USER_NAME：' . $userData->user_name . '　USER_ID：'. $userData->user_id . ']'. 'がログインしました。' );
     }
 
     /**

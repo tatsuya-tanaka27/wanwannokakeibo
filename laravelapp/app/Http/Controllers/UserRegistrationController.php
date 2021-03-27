@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Log;
 use App\Models\Kakeibo_user;
 use Carbon\Carbon;
 use App\Logic\KakeiboLogic;
+use Illuminate\Support\Facades\Crypt;
 
 /**
  * ユーザー登録画面コントローラー
@@ -45,7 +46,7 @@ class UserRegistrationController extends Controller
         $form = $request->all();
         unset($form['_token']);
         $kakeibo_user->user_id = $request->user_id;
-        $kakeibo_user->password = $request->password;
+        $kakeibo_user->password = Crypt::encryptString($request->password);
         $kakeibo_user->user_name = $request->user_name;
         $kakeibo_user->del_flg = 0;
         $kakeibo_user->created_at = $nowDate;
