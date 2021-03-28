@@ -29,7 +29,7 @@
                             <a href="/wanwannokakeibo/list">
                                 <img class="img-fluid" src="/images/ichiran200.PNG" alt="家計簿一覧" />
                             </a>
-                            <a href="#">
+                            <a href="/wanwannokakeibo/setting">
                                 <img class="img-fluid" src="/images/settei200.PNG" alt="家計簿設定" />
                             </a>
                         </div>

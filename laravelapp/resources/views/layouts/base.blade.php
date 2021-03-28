@@ -43,7 +43,7 @@
                                             <li><a href="/wanwannokakeibo/input">家計簿入力</a></li>
                                             <li><a href="/wanwannokakeibo/registration">家計簿項目登録</a></li>
                                             <li><a href="/wanwannokakeibo/list">家計簿一覧</a></li>
-                                            <li><a href="#">設定</a></li>
+                                            <li><a href="/wanwannokakeibo/setting">設定</a></li>
                                             <li><a href="/wanwannokakeibo/logout">ログアウト</a></li>
                                         </ul>
                                     </nav>

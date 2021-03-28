@@ -7,6 +7,7 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\InputController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\ListController;
+use App\Http\Controllers\SettingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +40,8 @@ Route::post('wanwannokakeibo/item-update', [RegistrationController::class, 'upda
 Route::post('wanwannokakeibo/item-delete', [RegistrationController::class, 'delete']);
 Route::get('wanwannokakeibo/list', [ListController::class, 'index']);
 Route::post('wanwannokakeibo/list', [ListController::class, 'post']);
+Route::get('wanwannokakeibo/setting', [SettingController::class, 'index']);
+Route::post('wanwannokakeibo/setting', [SettingController::class, 'post']);
 Route::get('wanwannokakeibo/logout', [LoginController::class, 'logout']);
 
 Auth::routes();

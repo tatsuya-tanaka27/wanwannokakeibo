@@ -18,7 +18,7 @@ use Hash;
  */
 class LoginController extends Controller
 {
-
+    // ユーザーパスワード
     private $user_password = null;
 
     /**
