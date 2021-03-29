@@ -33,7 +33,7 @@ class UserRegistrationController extends Controller
     /**
     * ユーザー登録画面ポスト処理
     *
-    * @param Request $request リクエストパラメーター
+    * @param UserRegistrationRequest $request リクエストパラメーター
     * @return トップ画面にリダイレクト
     */
     public function post(UserRegistrationRequest $request)

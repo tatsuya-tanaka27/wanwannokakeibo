@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Rules\UserIdRule;
 
-class LoginRequest extends FormRequest
+class RegistrationRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,7 +13,7 @@ class LoginRequest extends FormRequest
      */
     public function authorize()
     {
-        if($this->path() == 'wanwannokakeibo/login'){
+        if($this->path() == 'wanwannokakeibo/item-insert'){
             return true;
         } else {
             return false;
@@ -29,8 +28,8 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => ['required'],
-            'password' => ['required'],
+            'item_id' => ['required'],
+            'item_name' => ['required'],
         ];
     }
 
@@ -42,8 +41,8 @@ class LoginRequest extends FormRequest
     public function messages()
     {
         return [
-            'user_id.required' => 'ユーザーIDを入力するんだわん',
-            'password.required'  => 'パスワードを入力するんだわん',
+            'item_id.required' => '項目IDを入力するんだわん',
+            'item_name.required'  => '項目名を入力するんだわん',
         ];
     }
 
@@ -55,8 +54,8 @@ class LoginRequest extends FormRequest
     public function attributes()
     {
         return [
-            'user_id' => 'ユーザーID',
-            'password' => 'パスワード',
+            'item_id' => '項目ID',
+            'item_name' => '項目名',
         ];
     }
 }

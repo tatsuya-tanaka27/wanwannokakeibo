@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Rules\UserIdRule;
 
-class LoginRequest extends FormRequest
+class InputRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,7 +13,7 @@ class LoginRequest extends FormRequest
      */
     public function authorize()
     {
-        if($this->path() == 'wanwannokakeibo/login'){
+        if($this->path() == 'wanwannokakeibo/input'){
             return true;
         } else {
             return false;

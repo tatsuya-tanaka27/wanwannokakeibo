@@ -4,7 +4,7 @@ namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 
-class AlphaNumrule implements Rule
+class UserIdRule implements Rule
 {
     /**
      * Create a new rule instance.
@@ -25,8 +25,11 @@ class AlphaNumrule implements Rule
      */
     public function passes($attribute, $value)
     {
-        // 半角英数値のみ許容
-        return preg_match('/^[a-zA-Z0-9]+$/', $value);
+        // 8-12桁の半角英数値のみ許容
+        return preg_match("/^[a-zA-Z0-9]{8,12}$/", $value)
+            && preg_match("/[a-z]+/", $value)
+            && preg_match("/[A-Z]+/", $value)
+            && preg_match("/[0-9]+/", $value);
     }
 
     /**
@@ -36,6 +39,6 @@ class AlphaNumrule implements Rule
      */
     public function message()
     {
-        return ':attributeは半角英数字で入力するんだわん';
+        return ':attributeは８～１２桁の小文字英語、大文字英語、数字で入力するんだわん';
     }
 }

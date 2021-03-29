@@ -3,7 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Rules\AlphaNumrule;
+use App\Rules\UserIdRule;
+use App\Rules\PasswordRule;
 
 class UserRegistrationRequest extends FormRequest
 {
@@ -29,8 +30,8 @@ class UserRegistrationRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => ['required', new AlphaNumrule],
-            'password' => ['required'],
+            'user_id' => ['required', new UserIdRule, 'exists:kakeibo_users'],
+            'password' => ['required', new PasswordRule],
             'user_name' => ['required'],
         ];
     }
@@ -44,7 +45,9 @@ class UserRegistrationRequest extends FormRequest
     {
         return [
             'user_id.required' => 'ユーザーIDを入力するんだわん',
+            'user_id.exists' => '登録されていないユーザーではログインできないわん',
             'password.required'  => 'パスワードを入力するんだわん',
+            'user_name.required'  => 'ユーザー名を入力するんだわん',
         ];
     }
 

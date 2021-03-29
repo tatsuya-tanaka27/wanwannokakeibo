@@ -39,7 +39,7 @@
                 </tbody>
             </table>
             @if(count(Session::get('kakeiboData_now')) > 0)
-            <table id="inputListTable" class="table table-sm solid-border table-striped">
+            <table id="inputListTable" class="table table-sm solid-border">
                 <thead class="table-info">
                     <tr>
                         <th colspan="3">家計簿修正・削除</th>
