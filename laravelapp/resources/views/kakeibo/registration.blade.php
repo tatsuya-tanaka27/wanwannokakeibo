@@ -34,7 +34,7 @@
     </tbody>
 </table>
 @if(count(Session::get('userItems')) > 0)
-<table id="registrationListTable" class="table table-sm table-responsive">
+<table id="registrationListTable" class="table table-sm table-responsive table-striped">
     <thead class="table-info">
         <tr>
             <th>項目ID</th>

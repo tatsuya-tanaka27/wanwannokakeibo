@@ -12,9 +12,9 @@ class Kakeibo_user extends Model
     protected $guarded = array('id');
     protected $fillable = ['user_id'];
 
-    public static $rules = array(
-        'user_id' => 'required',
-        'password' => 'required',
+    // public static $rules = array(
+        // 'user_id' => 'required',
+        // 'password' => 'required',
         //'age' => 'integer|min:0|max:150'
-    );
+    // );
 }

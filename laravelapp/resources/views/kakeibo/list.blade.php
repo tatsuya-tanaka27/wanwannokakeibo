@@ -19,7 +19,7 @@
         </div>
         @if(count(Session::get('kakeiboData_dispDate')) > 0)
         <div class="table-responsive d-xl-flex d-lg-flex d-md-flex justify-content-center">
-            <table id="listTable" class="table table-sm solid-border">
+            <table id="listTable" class="table table-sm solid-border table-striped">
                 <thead class="table-info" align="center" nowrap>
                     <tr>
                         <th>項目</th>
@@ -39,7 +39,7 @@
                     @endforeach
                 </tbody>
             </table>
-            <table id="aggregateDataTable" class="table table-sm solid-border ml-2">
+            <table id="aggregateDataTable" class="table table-sm solid-border ml-2 table-striped">
                 <thead class="table-info" align="center" nowrap>
                     <tr>
                         <th colspan="2">家計簿合計金額</th>

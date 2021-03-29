@@ -39,7 +39,7 @@
                 </tbody>
             </table>
             @if(count(Session::get('kakeiboData_now')) > 0)
-            <table id="inputListTable" class="table table-sm solid-border">
+            <table id="inputListTable" class="table table-sm solid-border table-striped">
                 <thead class="table-info">
                     <tr>
                         <th colspan="3">家計簿修正・削除</th>
@@ -80,7 +80,7 @@
             </table>
         </div>
         <div id="right-area col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
-            <table id="aggregateDataTable" class="table table-sm solid-border ml-2">
+            <table id="aggregateDataTable" class="table table-sm solid-border ml-2 table-striped">
                 <thead class="table-info">
                     <tr>
                         <th colspan="2">家計簿金額合計</th>

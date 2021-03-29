@@ -10,6 +10,7 @@ use Validator;
 use App\Http\Validators\PasswordValidator;
 use Illuminate\Support\Facades\Crypt;
 use Hash;
+use App\Http\Requests\LoginRequest;
 
 
 /**
@@ -47,12 +48,12 @@ class LoginController extends Controller
     * @param Request $request リクエストパラメーター
     * @return トップ画面にリダイレクト
     */
-    public function post(Request $request)
+    public function post(LoginRequest $request)
     {
         Log::info('[ログイン処理開始]' );
 
         // バリデーションチェック
-        $this->validate($request, Kakeibo_user::$rules);
+        //$this->validate($request, Kakeibo_user::$rules);
 
         // ユーザー情報をセッションにセットする
         KakeiboLogic::setUser($request);
@@ -109,7 +110,7 @@ class LoginController extends Controller
 
         Log::info('[ログイン処理終了]' );
 
-        Log::info('[USER_NAME：' . $userData->user_name . '　USER_ID：'. $userData->user_id . ']'. 'がログインしました。' );
+        Log::info('[USER_NAME：' . $userData->user_name . '　USER_ID：'. $userData->user_id . ']'. 'がログイン。' );
 
         return view('kakeibo.index');
     }

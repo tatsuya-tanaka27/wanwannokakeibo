@@ -4,7 +4,7 @@ namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 
-class Kakeiborule implements Rule
+class AlphaNumrule implements Rule
 {
     /**
      * Create a new rule instance.
@@ -25,7 +25,8 @@ class Kakeiborule implements Rule
      */
     public function passes($attribute, $value)
     {
-        //
+        // 半角英数値のみ許容
+        return preg_match('/^[a-zA-Z0-9]+$/', $value);
     }
 
     /**
@@ -35,6 +36,6 @@ class Kakeiborule implements Rule
      */
     public function message()
     {
-        return 'The validation error message.';
+        return ':attributeは半角英数字で入力するんだわん';
     }
 }
