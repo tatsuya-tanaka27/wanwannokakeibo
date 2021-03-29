@@ -205,3 +205,12 @@ small {
 /* レスポンシブ用のスタイル start */
 
 /* レスポンシブ用のスタイル end */
+
+/* エラー用のスタイル start */
+
+.error_message {
+    color: red;
+    font-weight: bold;
+}
+
+/* エラー用のスタイル end */

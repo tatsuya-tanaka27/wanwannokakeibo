@@ -9,6 +9,7 @@ use App\Models\Kakeibo_user;
 use Carbon\Carbon;
 use App\Logic\KakeiboLogic;
 use Illuminate\Support\Facades\Crypt;
+use App\Http\Requests\UserRegistrationRequest;
 
 /**
  * ユーザー登録画面コントローラー
@@ -35,7 +36,7 @@ class UserRegistrationController extends Controller
     * @param Request $request リクエストパラメーター
     * @return トップ画面にリダイレクト
     */
-    public function post(Request $request)
+    public function post(UserRegistrationRequest $request)
     {
         Log::info('[ユーザー登録処理開始]' );
 

@@ -61,8 +61,24 @@ class LoginController extends Controller
         // ユーザー情報を取得
         $userData = $request->session()->get('userData');
 
+        // ユーザー情報が取得できていなければ、自画面に遷移
+        if(empty($userData)){
+            // ダミーの配列を使って、バリデータ作成
+            $validator = Validator::make(['dummy'=>'dummy'],[
+                'dummy' =>function($attribute, $value, $fail){
+                    $fail('登録されていないユーザーではログインできないわん');
+                }
+            ]);
+
+            return redirect('wanwannokakeibo/login')->withErrors($validator)->withInput();
+
+            //throw new \Exception('メールの形式が正しくありません。');
+            // echo "まだ登録されていないユーザーですわん";
+            // return redirect('wanwannokakeibo/login');
+        }
+
         // 暗号化されたパスワードをグローバル変数にセット
-        $this->user_password = $userData->password;;
+        $this->user_password = $userData->password;
 
         // パスワードチェック用の独自バリデータ
         $validator = Validator::make($request->all(),[

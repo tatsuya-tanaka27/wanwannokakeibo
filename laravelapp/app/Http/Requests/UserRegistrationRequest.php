@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Rules\AlphaNumrule;
 
-class LoginRequest extends FormRequest
+class UserRegistrationRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,7 +14,7 @@ class LoginRequest extends FormRequest
      */
     public function authorize()
     {
-        if($this->path() == 'wanwannokakeibo/login'){
+        if($this->path() == 'wanwannokakeibo/userRegistration'){
             return true;
         } else {
             return false;
@@ -30,7 +30,8 @@ class LoginRequest extends FormRequest
     {
         return [
             'user_id' => ['required', new AlphaNumrule],
-            'password' => ['required', new AlphaNumrule],
+            'password' => ['required'],
+            'user_name' => ['required'],
         ];
     }
 
@@ -57,6 +58,7 @@ class LoginRequest extends FormRequest
         return [
             'user_id' => 'ユーザーID',
             'password' => 'パスワード',
+            'user_name' => 'ユーザー名',
         ];
     }
 }
