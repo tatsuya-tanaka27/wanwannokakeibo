@@ -29,8 +29,8 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => ['required', new AlphaNumrule],
-            'password' => ['required', new AlphaNumrule],
+            'user_id' => ['required', new AlphaNumrule, 'exists:kakeibo_users'],
+            'password' => ['required'],
         ];
     }
 
@@ -43,6 +43,7 @@ class LoginRequest extends FormRequest
     {
         return [
             'user_id.required' => 'ユーザーIDを入力するんだわん',
+            'user_id.exists' => '登録されていないユーザーではログインできないわん',
             'password.required'  => 'パスワードを入力するんだわん',
         ];
     }
