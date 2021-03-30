@@ -126,7 +126,11 @@ class LoginController extends Controller
         // 画面入力されたユーザー情報取得
         $userData = $request->session()->get('userData');
 
-        Log::info('[USER_NAME：' . $userData->user_name . '　USER_ID：'. $userData->user_id . ']'. 'がログインしました。' );
+        if(isset($userData)){
+            Log::info('[USER_NAME：' . $userData->user_name . '　USER_ID：'. $userData->user_id . ']'. 'がログアウトしました。' );
+        } else {
+            Log::info('ログアウトしました。' );
+        }
 
         // セッション初期化
         $request->session()->forget('inputItems');

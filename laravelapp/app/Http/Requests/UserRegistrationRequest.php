@@ -30,7 +30,7 @@ class UserRegistrationRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => ['required', new UserIdRule, 'exists:kakeibo_users'],
+            'user_id' => ['required', new UserIdRule],
             'password' => ['required', new PasswordRule],
             'user_name' => ['required'],
         ];

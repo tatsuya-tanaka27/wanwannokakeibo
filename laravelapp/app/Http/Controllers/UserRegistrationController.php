@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use App\Logic\KakeiboLogic;
 use Illuminate\Support\Facades\Crypt;
 use App\Http\Requests\UserRegistrationRequest;
+use Validator;
 
 /**
  * ユーザー登録画面コントローラー
@@ -39,6 +40,21 @@ class UserRegistrationController extends Controller
     public function post(UserRegistrationRequest $request)
     {
         Log::info('[ユーザー登録処理開始]' );
+
+        // 画面から入力されたユーザーIDで検索
+        $count = Kakeibo_user::where('user_id', $request->user_id)->count();
+
+        // 重複するユーザーが存在すれば、自画面に遷移
+        if($count > 0){
+            // ダミーの配列を使って、バリデータ作成
+            $validator = Validator::make(['dummy'=>'dummy'],[
+                'dummy' =>function($attribute, $value, $fail){
+                    $fail('既に登録されているユーザーIDでは登録できないわん');
+                }
+            ]);
+
+            return redirect('wanwannokakeibo/userRegistration')->withErrors($validator)->withInput();
+        }
 
         // 「今日の日付」＋「00時00分00秒」をタイムゾーン付きで取得
         $nowDate = Carbon::today('Asia/Tokyo');
