@@ -17,13 +17,14 @@ class CreateKakeiboDataTable extends Migration
             $table->id()->autoIncrement();
             $table->string('user_id');
             $table->string('item_id');
+            $table->string('item_name');
             $table->date('input_date');
             $table->bigInteger('amount');
             $table->string('payer')->nullable();
             $table->string('remarks')->nullable();
             $table->char('del_flg');
             $table->timestamps();
-            $table->unique(['user_id']);
+            //$table->unique(['user_id']);
         });
     }
 

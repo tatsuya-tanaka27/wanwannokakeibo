@@ -17,7 +17,7 @@ class CreateKakeiboItemMstTable extends Migration
             $table->increments('id');
             $table->string('item_id')->length(30);
             $table->string('item_name');
-            $table->string('remarks');
+            $table->string('remarks')->nullable();
             $table->boolean('del_flg');
             $table->timestamps();
         });

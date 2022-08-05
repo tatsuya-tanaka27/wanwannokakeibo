@@ -15,9 +15,10 @@ class CreateKakeiboUserItemsTable extends Migration
     {
         Schema::create('kakeibo_user_items', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('user_id');
             $table->string('item_id')->length(30);
             $table->string('item_name');
-            $table->string('remarks');
+            $table->string('remarks')->nullable();
             $table->boolean('del_flg');
             $table->timestamps();
         });
