@@ -21,7 +21,8 @@ use App\Http\Controllers\SettingController;
 */
 
 
-Route::get('/', function () { return view('welcome');});
+// Route::get('/', function () { return view('welcome');});
+Route::get('/{any}', function() {return view('app');})->where('any', '.*');
 //Route::get('/wanwannokakeibo/index', 'IndexController@index');
 Route::get('wanwannokakeibo', [LoginController::class, 'index']);
 Route::get('wanwannokakeibo/index', [IndexController::class, 'index']);
