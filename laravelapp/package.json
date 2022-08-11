@@ -24,5 +24,10 @@
         "sass-loader": "^11.0.1",
         "vue": "^3.2.36",
         "vue-loader": "^17.0.0"
+    },
+    "dependencies": {
+        "autoprefixer": "10.4.5",
+        "gulp-laravel-autoprefixer": "0.0.3",
+        "vue-router": "^4.0.13"
     }
 }
