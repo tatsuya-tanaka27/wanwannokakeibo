@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserRegistrationController;
 use App\Http\Controllers\IndexController;
@@ -20,9 +21,12 @@ use App\Http\Controllers\SettingController;
 |
 */
 
+Auth::routes();
 
 // Route::get('/', function () { return view('welcome');});
-Route::get('/{any}', function() {return view('app');})->where('any', '.*');
+Route::get('{path}', [HomeController::class, 'index'])->where('path', '.*');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::get('/{any}', function() {return view('app');})->where('any', '.*');
 //Route::get('/wanwannokakeibo/index', 'IndexController@index');
 Route::get('wanwannokakeibo', [LoginController::class, 'index']);
 Route::get('wanwannokakeibo/index', [IndexController::class, 'index']);
@@ -45,6 +49,6 @@ Route::get('wanwannokakeibo/setting', [SettingController::class, 'index']);
 Route::post('wanwannokakeibo/setting', [SettingController::class, 'post']);
 Route::get('wanwannokakeibo/logout', [LoginController::class, 'logout']);
 
-Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
